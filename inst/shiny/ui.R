@@ -8,16 +8,15 @@ library(statnetWeb)
 
 shinyUI(
   navbarPage(
-    #theme="mycosmo.css",
     title=NULL,
-    id= 'navbar', windowTitle = 'statnetWeb', collapsible=TRUE,
+    id= 'navbar', windowTitle = 'statnetWeb ADP', collapsible=TRUE,
 
 
 
 # Front Page (About) ------------------------------------------------------
 
 
-tabPanel(title=span('statnetWeb', id="sWtitle"),
+tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
          value='tab1',
          fluidRow(
           column(2,
@@ -30,13 +29,11 @@ tabPanel(title=span('statnetWeb', id="sWtitle"),
           ),
    column(6, style="padding: 0 30px 0 0;",
           div(id="aboutbox",
-            p("Welcome to the first interactive interface for the", strong("ergm"),
-              "package!", strong("ergm"), "is part of the statnet network analysis software -",
-              "a suite of packages written in R - and this GUI also includes some of the functionality",
-              "from the associated packages", strong("network"), " and ", strong("sna"), ".  This web application",
-              "is written with the Shiny framework from RStudio and development is via GitHub.  More information",
-              "on the statnet software, the ergm package, Shiny and our GitHub repository can be found in the",
-              "resource links on the right."),
+            p("Welcome to the statnetWeb ADP web application!",
+              "This application is the result of a collaboration between PATH and
+              the Network Modeling Group at the University of Washington"),
+            p("From here you will be able to explore and analyze data from ___,
+              as well as upload your own network data from other projects"),
 
             p("This interface is useful for teachers and students of introductory network analysis,",
               "for newcomers to exponential random graphs models, and for experienced network modelers",
@@ -65,12 +62,12 @@ tags$pre(id='scitation','@Manual{handcock:statnet,
   url = {http://statnetproject.org}
 }'),
 
-p(strong("statnetWeb")),
-tags$pre(id='swcitation',"@Manual{beylerian:statnetWeb,
-  title = {\\pkg{statnetWeb}: A Graphical User Interface for Network Modeling with 'Statnet'},
+p(strong("statnetWeb ADP")),
+tags$pre(id='swcitation',"@Manual{beylerian:statnetWeb-ADP,
+  title = {\\pkg{statnetWeb-ADP}: Network Analysis for the Access and Delivery Partnership},
   author = {Emily N. Beylerian and Samuel Jenness and Kirk Li and Martina Morris},
   year = {2015},
-  note = {\\proglang{R}~package version~0.3.4},
+  note = {\\proglang{R}~package version~0.1.0},
   address = {Seattle, WA},
   url = {https://cran.r-project.org/web/packages/statnetWeb/}
 }")
@@ -81,13 +78,13 @@ tags$pre("Mark S. Handcock, David R. Hunter, Carter T. Butts, Steven M. Goodreau
 Martina Morris (2003). statnet: Software tools for the Statistical Modeling
 of Network Data. URL http://statnetproject.org"),
 
-p(strong("statnetWeb")),
-tags$pre("Emily N. Beylerian, Samuel Jenness, Kirk Li, and Martina Morris (2014).
-statnetWeb: A Graphical User Interface for Network Modeling with 'Statnet'.")
+p(strong("statnetWeb ADP")),
+tags$pre("Emily N. Beylerian, Samuel Jenness, Kirk Li, and Martina Morris (2016).
+statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                        )
             ),
 
-            p('If you use statnet or statnetWeb, please cite them.',
+            p('If you publish materials using statnet or statnetWeb, please cite them.',
               'Additional citation information for statnet',
               'and the component packages can be found here:'),
             tags$ul(
@@ -141,11 +138,12 @@ statnetWeb: A Graphical User Interface for Network Modeling with 'Statnet'.")
               div(a("Shiny: a web application framework for R", href="http://shiny.rstudio.com/",
                     target="_blank"))
    ),
-   fluidRow(img(src= 'UW.Wordmark_ctr_K.jpg', width=200), style="margin-left:15px;"),
-   fluidRow(a(img(src = 'csdelogo_crop.png', height = 40, width = 40),
+   fluidRow(img(src = '00550.jpg', width = 100), style="margin-left:15px;"),
+   fluidRow(img(src = 'UW.Wordmark_ctr_K.jpg', width = 200), style="margin-left:15px;"),
+   fluidRow(a(img(src = 'csdelogo_crop.png', height = 28, width = 28),
              href = 'https://csde.washington.edu/', target = '_blank'),
-            a(img(src = 'csde_goudy.fw.png', width=150), href = 'https://csde.washington.edu/',
-             target = '_blank'), style="margin-left:15px;")
+            a(img(src = 'csde_goudy.fw.png', width = 125), href = 'https://csde.washington.edu/',
+             target = '_blank'), style = "margin-left:15px;")
    )
    )
  ),

@@ -1326,7 +1326,7 @@ output$nwsum2 <- renderPrint({
 
 output$dynamiccolor <- renderUI({
   selectInput('colorby',
-              label = 'Color nodes according to:',
+              label = NULL,
               c('None' = 2, attrib()))
 })
 outputOptions(output,'dynamiccolor', suspendWhenHidden=FALSE, priority=10)
@@ -1347,7 +1347,7 @@ outputOptions(output,'attrlevels', suspendWhenHidden=FALSE, priority=10)
 
 output$dynamicsize <- renderUI({
   selectInput('sizeby',
-              label = 'Size nodes according to:',
+              label = NULL,
               c('None' = 1, 'Betweenness', numattr()))
 })
 outputOptions(output,'dynamicsize',suspendWhenHidden=FALSE)

@@ -733,7 +733,22 @@ fluidRow(
           wellPanel(
                 conditionalPanel(condition='input.plottabs == "Network Plot"',
                    selectInput('activeplot', label = NULL,
-                               choices = c("Static Plot", "Interactive Plot")),
+                               choices = c("Static Plot",
+                                           "Interactive Plot")),
+                   conditionalPanel('input.activeplot == "Interactive Plot"',
+                        helpText(strong("Interactive plot:"),
+                                 "Hover over a node to enlarge it,
+                                 click on a node to see its name and
+                                 attributes. Double click on a node to highlight
+                                 its neighbors. Switch to static plot in the menu above
+                                 to remove this functionality.")
+                        ),
+                   conditionalPanel('input.activeplot == "Static Plot"',
+                        helpText(strong("Static plot:"),
+                                 "The graph will not respond when you click on
+                                 it. Switch to interactive plot in the menu
+                                 above to add this functionality.")
+                   ),
                    checkboxInput('iso',
                                  label = 'Display isolates',
                                  value = TRUE),
@@ -745,6 +760,8 @@ fluidRow(
                                label = 'Vertex opacity',
                                min = 0, max = 1, value = 1),
                    br(),
+                   strong("Color nodes:"),
+                   helpText("Choose a nodal attribute to color code the nodes"),
                    uiOutput("dynamiccolor"),
                    conditionalPanel(condition="Number(output.attrlevels) > 9",
                      column(10,
@@ -755,10 +772,12 @@ fluidRow(
                             )
                      )),
                    #span(bsAlert(inputId = 'colorwarning'), style='font-size: 0.82em;'),
+                   strong("Size nodes:"),
+                   helpText("Choose a numeric attribute or measurement to edit the size of the nodes"),
                    uiOutput('dynamicsize'),
                    br(),
                    actionButton("refreshplot", icon = icon("refresh"),
-                                label = "Refresh Plot", class = "btn-sm"),
+                                label = "Refresh Node Positions", class = "btn-sm"),
                    downloadButton('nwplotdownload',
                                   label = "Download Plot", class = "btn-sm")),
                 conditionalPanel(condition='input.plottabs == "Attributes"',

@@ -456,8 +456,6 @@ nwmid <- reactive({
 nw <- reactive({
   nw_var <- nwmid()
 
-#deleting attributes is no longer available
-
   values$input_termslist <- list()
   updateTextInput(session, inputId='terms', value='edges')
 
@@ -1255,14 +1253,36 @@ output$newattrname <- renderPrint({
 
 #summary of network attributes
 output$nwsum <- renderPrint({
-  if (is.null(nw())){
-    return(cat('NA'))
-  }
   nw_var <- nw()
-  if (class(nw_var)!="network"){
-    return(cat(nw_var))
+  if (is.network(nw_var)){
+    cat("Network attributes: \n")
+    cat(" directed =", nw_var$gal$directed, "\n")
+    cat(" vertices =", nw_var$gal$n, "\n")
+    cat(" total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
+    cat("   missing edges =", network.naedgecount(nw_var), "\n")
+    cat("   non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
+
+    cat(" triangles =", summary(nw_var ~ triangle), "\n")
+    cat(" isolates =", summary(nw_var ~ isolates), "\n\n")
+
+    vna <- list.vertex.attributes(nw_var)
+    vna <- vna[vna != "na"]
+    if(length(vna) == 0){
+      cat("No vertex attributes","\n",sep="")
+    }else{
+      cat("Vertex attribute names:","\n")
+      cat("   ",vna,"\n")
+    }
+
+    ean <- list.edge.attributes(nw_var)
+    ean <- ean[ean != "na"]
+    if(length(ean) == 0){
+      cat("No edge attributes","\n",sep="")
+    }else{
+      cat("Edge attribute names:","\n")
+      cat("   ",ean,"\n")
+    }
   }
-  return(nw_var)
 })
 
 
@@ -1271,12 +1291,37 @@ output$nwsum <- renderPrint({
 #NETWORK PLOT
 
 #summary of network attributes
-output$attr2 <- renderPrint({
-  if (!is.network(nw())){
-    return(cat('NA'))
-  }
+output$nwsum2 <- renderPrint({
   nw_var <- nw()
-  return(nw_var)
+  if (is.network(nw_var)){
+    cat("Network attributes: \n")
+    cat(" directed =", nw_var$gal$directed, "\n")
+    cat(" vertices =", nw_var$gal$n, "\n")
+    cat(" total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
+    cat("   missing edges =", network.naedgecount(nw_var), "\n")
+    cat("   non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
+
+    cat(" triangles =", summary(nw_var ~ triangle), "\n")
+    cat(" isolates =", summary(nw_var ~ isolates), "\n\n")
+
+    vna <- list.vertex.attributes(nw_var)
+    vna <- vna[vna != "na"]
+    if(length(vna) == 0){
+      cat("No vertex attributes","\n",sep="")
+    }else{
+      cat("Vertex attribute names:","\n")
+      cat("   ",vna,"\n")
+    }
+
+    ean <- list.edge.attributes(nw_var)
+    ean <- ean[ean != "na"]
+    if(length(ean) == 0){
+      cat("No edge attributes","\n",sep="")
+    }else{
+      cat("Edge attribute names:","\n")
+      cat("   ",ean,"\n")
+    }
+  }
 })
 
 output$dynamiccolor <- renderUI({

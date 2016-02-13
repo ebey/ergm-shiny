@@ -851,7 +851,7 @@ fluidRow(
                                  )
                 )),
        tabPanel(title='Network Summary', br(),
-        verbatimTextOutput('attr2'))
+        verbatimTextOutput('nwsum2'))
         )
      )
  ),

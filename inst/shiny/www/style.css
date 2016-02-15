@@ -87,14 +87,28 @@ div.busy {
   z-index: 50;
 }
 
-#aboutButton,
-#citeButton,
-#startButton {
+.pg1btn {
   margin-bottom: 5px;
   width: 137px;
 }
+.btn-secondary {
+  color: #ffffff;
+  background-color: #6da5d1;
+  border-color: #377bae;
+}
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary.focus,
+.btn-secondary:active,
+.btn-secondary.active,
+.open > .dropdown-toggle.btn-primary {
+  color: #ffffff;
+  background-color: #3d88c2;
+  border-color: #2b5f88;
+}
 
-#citebox {
+#citebox,
+#basicsbox {
   display: none;
 }
 

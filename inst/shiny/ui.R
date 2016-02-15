@@ -21,32 +21,25 @@ tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
          fluidRow(
           column(2,
                  actionButton("aboutButton", label = "About statnetWeb",
-                              class = "btn active"),
+                              class = "pg1btn btn active"),
                  actionButton("citeButton", label = "Citing statnetWeb",
-                              class = "btn"),
+                              class = "pg1btn btn"),
+                 actionButton("nwbasicsButton", label = "Network Basics",
+                              class = "pg1btn btn btn-secondary"),
                  actionButton('startButton', label='Get Started',
-                              class="btn btn-primary")
+                              class="pg1btn btn btn-primary")
           ),
    column(6, style="padding: 0 30px 0 0;",
           div(id="aboutbox",
-            p("Welcome to the statnetWeb ADP web application!",
+            p(strong("Welcome to the statnetWeb ADP web application!"),
               "This application is the result of a collaboration between PATH and
               the Network Modeling Group at the University of Washington"),
             p("From here you will be able to explore and analyze data from ___,
               as well as upload your own network data from other projects"),
 
-            p("This interface is useful for teachers and students of introductory network analysis,",
-              "for newcomers to exponential random graphs models, and for experienced network modelers",
-              "who want easier access to analysis results. If you are new to ergm, you may find it helpful",
-              "to work through the", a("ergm tutorial",
-                                       href="http://statnet.csde.washington.edu/workshops/SUNBELT/EUSN/ergm/ergm_tutorial.html",
-                                       target="_blank"), "using this interface. Advanced users will still want to interact",
-              "via the command line in order to access the full functionality of ergm."),
-            p("A typical network analysis will move sequentially through the tabs at the top of the page.",
-              "Click on the help icon at the top of any page for guidance."),
             p("Do you have comments/suggestions/complaints on this prototype app? Please share them with us.",
-              "They are best submitted through our", a('GitHub site,',
-                                                       href='https://github.com/statnet/statnetWeb',
+              "They are best submitted through this", a('GitHub site,',
+                                                       href='https://github.com/ebey/statnetWeb-ADP',
                                                        target='_blank'),
               "or by email to the statnet_help mailing list (see", actionLink("helpLink", "Help"), "tab).")
           ),
@@ -98,18 +91,17 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                         href = 'http://statnet.csde.washington.edu/about_us.shtml',
                         target = '_blank'))
             )
-            )
+            ),
+          div(id="basicsbox",
+              p("TEST TEST TEST")
+              )
           ),
    column(4,
           wellPanel(
               h5(tags$u('Resources')),
-              div(title = "Wiki page for statnetWeb",
-                a("About statnetWeb",
-                  href = "https://statnet.csde.washington.edu/trac/wiki/statnetWeb",
-                  target = "_blank")),
               div(title=paste("Homepage of the statnet project with tutorials,",
                               "publications and recent news."),
-                  a("About statnet",
+                  a("About statnet software",
                     href = "https://statnet.csde.washington.edu/trac", target = "_blank")
               ),
 
@@ -133,12 +125,11 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                         target = "_blank")),
                     style="margin-bottom:10px;"),
               br(),
-              div(a("statnetWeb on GitHub", href="https://github.com/statnet/statnetWeb",
-                    target="_blank")),
-              div(a("Shiny: a web application framework for R", href="http://shiny.rstudio.com/",
+              div(a("statnetWeb ADP on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
                     target="_blank"))
    ),
-   fluidRow(img(src = '00550.jpg', width = 100), style="margin-left:15px;"),
+   fluidRow(a(img(src = '00550.jpg', width = 100), style="margin-left:15px;",
+              href = "http://www.path.org/", target = "_blank")),
    fluidRow(img(src = 'UW.Wordmark_ctr_K.jpg', width = 200), style="margin-left:15px;"),
    fluidRow(a(img(src = 'csdelogo_crop.png', height = 28, width = 28),
              href = 'https://csde.washington.edu/', target = '_blank'),
@@ -1374,9 +1365,7 @@ tabPanel(title='Help', value='tab8',
                                       target = "_blank")),
                                 style="margin-bottom:10px;"),
                          br(),
-                         div(a("statnetWeb on GitHub", href="https://github.com/statnet/statnetWeb",
-                               target="_blank")),
-                         div(a("Shiny: a web application framework for R", href="http://shiny.rstudio.com/",
+                         div(a("statnetWeb ADP on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
                                target="_blank"))
                        ),
                        mainPanel(

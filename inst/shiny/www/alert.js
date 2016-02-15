@@ -6,14 +6,27 @@ $(document).ready(function(){
   $("#aboutButton").click(function(){
     $("#aboutbox").show();
     $("#citebox").hide();
+    $("#basicsbox").hide();
     $("#aboutButton").toggleClass("active", true);
     $("#citeButton").toggleClass("active", false);
+    $("#nwbasicsButton").toggleClass("active", false);
   });
 
   $("#citeButton").click(function(){
     $("#citebox").show();
     $("#aboutbox").hide();
+    $("#basicsbox").hide();
     $("#citeButton").toggleClass("active", true);
+    $("#aboutButton").toggleClass("active", false);
+    $("#nwbasicsButton").toggleClass("active", false);
+  });
+
+  $("#nwbasicsButton").click(function(){
+    $("#basicsbox").show();
+    $("#citebox").hide();
+    $("#aboutbox").hide();
+    $("#nwbasicsButton").toggleClass("active", true);
+    $("#citeButton").toggleClass("active", false);
     $("#aboutButton").toggleClass("active", false);
   });
 

@@ -723,23 +723,14 @@ fluidRow(
        tabPanel(title='Display Options', br(),
           wellPanel(
                 conditionalPanel(condition='input.plottabs == "Network Plot"',
+                   strong("Static or interactive plot?"),
+                   helpText("On the interactive plot, click to see Node ID and
+                            attributes. Double click to highlight neighbors.",
+                            class = "nomarg"),
                    selectInput('activeplot', label = NULL,
                                choices = c("Static Plot",
                                            "Interactive Plot")),
-                   conditionalPanel('input.activeplot == "Interactive Plot"',
-                        helpText(strong("Interactive plot:"),
-                                 "Hover over a node to enlarge it,
-                                 click on a node to see its name and
-                                 attributes. Double click on a node to highlight
-                                 its neighbors. Switch to static plot in the menu above
-                                 to remove this functionality.")
-                        ),
-                   conditionalPanel('input.activeplot == "Static Plot"',
-                        helpText(strong("Static plot:"),
-                                 "The graph will not respond when you click on
-                                 it. Switch to interactive plot in the menu
-                                 above to add this functionality.")
-                   ),
+
                    checkboxInput('iso',
                                  label = 'Display isolates',
                                  value = TRUE),
@@ -747,12 +738,16 @@ fluidRow(
                                  label = 'Display vertex names',
                                  value = FALSE),
                    br(),
+                   strong("Vertex opacity:"),
+                   helpText("Clear = 0, Solid = 1",
+                            class = "nomarg"),
                    sliderInput('transp',
-                               label = 'Vertex opacity',
+                               label = NULL,
                                min = 0, max = 1, value = 1),
                    br(),
                    strong("Color nodes:"),
-                   helpText("Choose a nodal attribute to color code the nodes"),
+                   helpText("Choose a nodal attribute to color code the nodes.",
+                            class = "nomarg"),
                    uiOutput("dynamiccolor"),
                    conditionalPanel(condition="Number(output.attrlevels) > 9",
                      column(10,
@@ -764,7 +759,8 @@ fluidRow(
                      )),
                    #span(bsAlert(inputId = 'colorwarning'), style='font-size: 0.82em;'),
                    strong("Size nodes:"),
-                   helpText("Choose a numeric attribute or measurement to edit the size of the nodes"),
+                   helpText("Choose a numeric attribute or measurement to edit the size of the nodes.",
+                            class = "nomarg"),
                    uiOutput('dynamicsize'),
                    br(),
                    actionButton("refreshplot", icon = icon("refresh"),

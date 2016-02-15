@@ -8,7 +8,9 @@
   color: #333333;
   background-color: inherit;
 }
-
+.nomarg {
+  margin: 0;
+}
 #sWtitle {
   font-family:Courier;
   font-size:13pt;

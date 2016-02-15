@@ -1280,7 +1280,7 @@ output$nwsum <- renderPrint({
     ean <- ean[ean != "na"]
     cat("Edge attributes:","\n")
     if(length(ean) == 0){
-      cat("   None \n")
+      cat("    None \n")
     }else{
       cat("   ",ean,"\n")
     }
@@ -1319,7 +1319,7 @@ output$nwsum2 <- renderPrint({
     ean <- ean[ean != "na"]
     cat("Edge attributes:","\n")
     if(length(ean) == 0){
-      cat("    None \n")
+      cat("     None \n")
     }else{
       cat("   ",ean,"\n")
     }

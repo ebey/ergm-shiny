@@ -1267,19 +1267,19 @@ output$nwsum <- renderPrint({
 
     vna <- list.vertex.attributes(nw_var)
     vna <- vna[vna != "na"]
+    cat("Vertex attributes:","\n")
     if(length(vna) == 0){
-      cat("No vertex attributes","\n",sep="")
-    }else{
-      cat("Vertex attribute names:","\n")
+      cat("    None \n")
+    } else {
       cat("   ",vna,"\n")
     }
 
     ean <- list.edge.attributes(nw_var)
     ean <- ean[ean != "na"]
+    cat("Edge attributes:","\n")
     if(length(ean) == 0){
-      cat("No edge attributes","\n",sep="")
+      cat("   None \n")
     }else{
-      cat("Edge attribute names:","\n")
       cat("   ",ean,"\n")
     }
   }
@@ -1306,19 +1306,19 @@ output$nwsum2 <- renderPrint({
 
     vna <- list.vertex.attributes(nw_var)
     vna <- vna[vna != "na"]
+    cat("Vertex attributes:","\n")
     if(length(vna) == 0){
-      cat("No vertex attributes","\n",sep="")
-    }else{
-      cat("Vertex attribute names:","\n")
+      cat("   None \n")
+    } else {
       cat("   ",vna,"\n")
     }
 
     ean <- list.edge.attributes(nw_var)
     ean <- ean[ean != "na"]
+    cat("Edge attributes:","\n")
     if(length(ean) == 0){
-      cat("No edge attributes","\n",sep="")
+      cat("    None \n")
     }else{
-      cat("Edge attribute names:","\n")
       cat("   ",ean,"\n")
     }
   }

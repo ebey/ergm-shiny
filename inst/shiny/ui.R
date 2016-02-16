@@ -246,10 +246,6 @@ fluidRow(
                 )
                )
              )
-           ),
-         conditionalPanel(
-           condition="input.filetype == 5 & input.samplenet != ''",
-           wellPanel(uiOutput("datadesc"))
            )
          ),
     tabPanel('Edit Network', br(),
@@ -418,9 +414,16 @@ fluidRow(
 column(4,
 tabsetPanel(
   tabPanel('Network Summary', br(),
-           verbatimTextOutput('nwsum')
+           verbatimTextOutput('nwsum'),
+           wellPanel(
+             selectizeInput("glossterm2", label = "Glossary",
+                            choices = c("Search for a network concept" = "",
+                                        sort(names(glossary)))),
+             textOutput("glossout2")
+           )
            ))
-  )
+
+)
 ),
 
 icon('question-circle', class='fa-2x helper-btn'),
@@ -857,7 +860,13 @@ fluidRow(
                 )),
        tabPanel(title='Network Summary', br(),
         verbatimTextOutput('nwsum2'))
-        )
+        ),
+     wellPanel(
+       selectizeInput("glossterm3", label = "Glossary",
+                      choices = c("Search for a network concept" = "",
+                                  sort(names(glossary)))),
+       textOutput("glossout3")
+     )
      )
  ),
 div(id='plottabhelp', class='helper-btn', icon('question-circle', 'fa-2x')),

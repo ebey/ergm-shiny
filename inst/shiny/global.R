@@ -166,3 +166,19 @@ attr.info <- function(df, colname, numattrs, breaks) {
   return(tab)
 }
 
+glossary <- list()
+glossary$vertex <- "A vertex (also known as a node or actor) is the basic element of a network. It can represent a person, country, organization, etc."
+glossary$actor <- "An actor (also known as a node or vertex) is the basic element of a network. It can represent a person, country, organization, etc."
+glossary$node <- "A node (also known as a vertex or actor) is the basic element of a network. It can represent a person, country, organization, etc."
+glossary$edge <- "An edge (also known as a tie or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
+glossary$tie <- "A tie (also known as an edge or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
+glossary$link <- "An link (also known as an edge or a tie) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
+glossary$dyad <- "A dyad is a pair of nodes. In a network where the total number of nodes is n, the number of dyads in a directed network is (n-1)*n and in an undirected network is (1/2)*(n-1)*n"
+glossary$degree <- "The degree of a node is equal to the number of edges it has. For directed networks this can be subset by in-degree (the number of edges that point to the node) and out-degree (the number of edges that point away from the node)."
+glossary[["degree distribution"]] <- "The degree distribution is a network-level summary that shows how the edges in a network are distributed among the nodes. The degree distributions of directed graphs can be subset by in-degree or out-degree."
+glossary$geodesic <- 'A geodesic is a dyad-level measure for the shortest possible path between a pair of nodes. If there is no path between a pair of nodes, the geodesic distance is said to be infinite, or "inf" for short.'
+glossary[["geodesic distribution"]] <- "The geodesic distribution is a network-level summary of the geodesics between all possible pairs of nodes."
+glossary[["adjacency matrix"]] <- ""
+glossary[["incidence matrix"]] <- ""
+glossary[["edge list"]] <- ""
+glossary$bipartite <- ""

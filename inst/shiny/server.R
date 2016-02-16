@@ -118,7 +118,7 @@ nwinit <- reactive({
         try({nw_var <- network(read.csv(paste(filepath), sep=",", header=header,
                                         row.names=row_names),
                           directed=input$dir, loops=input$loops,
-                          multiple=input$multiple, bipartite=input$bipartite,
+                          multiple=FALSE, bipartite=input$bipartite,
                           matrix.type=input$matrixtype,
                           ignore.eval=FALSE, names.eval='edgevalue')
              })
@@ -1230,6 +1230,9 @@ output$newattrname <- renderPrint({
 output$nwsum <- renderPrint({
   nw_var <- nw()
   if (is.network(nw_var)){
+    gmode <- ifelse(is.directed(nw_var), "digraph", "graph")
+
+
     cat("Network attributes: \n")
     cat("  directed =", nw_var$gal$directed, "\n")
     cat("  vertices =", nw_var$gal$n, "\n")
@@ -1237,6 +1240,8 @@ output$nwsum <- renderPrint({
     cat("    missing edges =", network.naedgecount(nw_var), "\n")
     cat("    non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
 
+    cat("  density =", sna::gden(dat = nw_var, diag = input$loops,
+                                 mode = gmode), "\n")
     cat("  triangles =", summary(nw_var ~ triangle), "\n")
     cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 
@@ -1269,6 +1274,8 @@ output$nwsum <- renderPrint({
 output$nwsum2 <- renderPrint({
   nw_var <- nw()
   if (is.network(nw_var)){
+    gmode <- ifelse(is.directed(nw_var), "digraph", "graph")
+
     cat("Network attributes: \n")
     cat("  directed =", nw_var$gal$directed, "\n")
     cat("  vertices =", nw_var$gal$n, "\n")
@@ -1276,6 +1283,8 @@ output$nwsum2 <- renderPrint({
     cat("    missing edges =", network.naedgecount(nw_var), "\n")
     cat("    non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
 
+    cat("  density =", sna::gden(dat = nw_var, diag = input$loops,
+                                 mode = gmode), "\n")
     cat("  triangles =", summary(nw_var ~ triangle), "\n")
     cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 

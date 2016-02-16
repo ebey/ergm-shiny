@@ -34,8 +34,9 @@ tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
             p(strong("Welcome to the statnetWeb ADP web application!"),
               "This application is the result of a collaboration between PATH and
               the Network Modeling Group at the University of Washington"),
-            p("From here you will be able to explore and analyze data from ___,
-              as well as upload your own network data from other projects"),
+            p("From here you will be able to explore and analyze data from",
+              "the PATH Access and Delivery Partnership,",
+              "as well as upload your own network data from other projects"),
 
             p("Do you have comments/suggestions/complaints on this prototype app? Please share them with us.",
               "They are best submitted through this", a('GitHub site,',
@@ -128,8 +129,9 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
               div(a("statnetWeb ADP on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
                     target="_blank"))
    ),
-   fluidRow(a(img(src = '00550.jpg', width = 100), style="margin-left:15px;",
-              href = "http://www.path.org/", target = "_blank")),
+   fluidRow(a(img(src = '00550.jpg', width = 100),
+              href = "http://www.path.org/", target = "_blank"),
+            style="margin-left:15px;"),
    fluidRow(img(src = 'UW.Wordmark_ctr_K.jpg', width = 200), style="margin-left:15px;"),
    fluidRow(a(img(src = 'csdelogo_crop.png', height = 28, width = 28),
              href = 'https://csde.washington.edu/', target = '_blank'),
@@ -216,11 +218,13 @@ fluidRow(
                                                  "or column labels.", class = "nomarg")),
 
                        br(),
-                       span(strong('Network Attributes')),
-                       checkboxInput('dir', 'directed?', value=TRUE),
-                       checkboxInput('loops', 'loops?', value=FALSE),
-                       checkboxInput('multiple', 'multiple?', value=FALSE),
-                       checkboxInput('bipartite', 'bipartite?', value=FALSE)
+                       strong('Network attributes'),
+                       span(checkboxInput('dir', 'directed?', value=TRUE),
+                            title="Check the box if edges in the network are directed"),
+                       span(checkboxInput('loops', 'loops?', value=FALSE),
+                            title="Check the box if it is possible for nodes to be connected to themselves"),
+                       span(checkboxInput('bipartite', 'bipartite?', value=FALSE),
+                            title="")
                       )
 
 

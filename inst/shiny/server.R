@@ -1258,14 +1258,14 @@ output$nwsum <- renderPrint({
   nw_var <- nw()
   if (is.network(nw_var)){
     cat("Network attributes: \n")
-    cat(" directed =", nw_var$gal$directed, "\n")
-    cat(" vertices =", nw_var$gal$n, "\n")
-    cat(" total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
-    cat("   missing edges =", network.naedgecount(nw_var), "\n")
-    cat("   non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
+    cat("  directed =", nw_var$gal$directed, "\n")
+    cat("  vertices =", nw_var$gal$n, "\n")
+    cat("  total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
+    cat("    missing edges =", network.naedgecount(nw_var), "\n")
+    cat("    non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
 
-    cat(" triangles =", summary(nw_var ~ triangle), "\n")
-    cat(" isolates =", summary(nw_var ~ isolates), "\n\n")
+    cat("  triangles =", summary(nw_var ~ triangle), "\n")
+    cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 
     vna <- list.vertex.attributes(nw_var)
     vna <- vna[vna != "na"]
@@ -1297,14 +1297,14 @@ output$nwsum2 <- renderPrint({
   nw_var <- nw()
   if (is.network(nw_var)){
     cat("Network attributes: \n")
-    cat(" directed =", nw_var$gal$directed, "\n")
-    cat(" vertices =", nw_var$gal$n, "\n")
-    cat(" total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
-    cat("   missing edges =", network.naedgecount(nw_var), "\n")
-    cat("   non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
+    cat("  directed =", nw_var$gal$directed, "\n")
+    cat("  vertices =", nw_var$gal$n, "\n")
+    cat("  total edges =", network.edgecount(nw_var, na.omit = FALSE), "\n")
+    cat("    missing edges =", network.naedgecount(nw_var), "\n")
+    cat("    non-missing edges =", network.edgecount(nw_var, na.omit = TRUE), "\n\n")
 
-    cat(" triangles =", summary(nw_var ~ triangle), "\n")
-    cat(" isolates =", summary(nw_var ~ isolates), "\n\n")
+    cat("  triangles =", summary(nw_var ~ triangle), "\n")
+    cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 
     vna <- list.vertex.attributes(nw_var)
     vna <- vna[vna != "na"]
@@ -1612,7 +1612,7 @@ output$dynamiccmode_dd <- renderUI({
     }
   }
   selectInput("cmode_dd",
-              label = "Type of degree",
+              label = NULL,
               choices = menu)
 })
 outputOptions(output,'dynamiccmode_dd',suspendWhenHidden=FALSE, priority=10)
@@ -1624,7 +1624,7 @@ output$dynamiccolor_dd <- renderUI({
       menu <- c()
     }
     selectInput('colorby_dd',
-                label = 'Color bars according to:',
+                label = NULL,
                 c('None', menu),
                 selected = 'None')
   }

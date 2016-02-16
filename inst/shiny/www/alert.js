@@ -144,14 +144,6 @@ $(document).ready(function(){
   //  $("#closewarning1").show();
   //});
 
-  $("#ddhelper").click(function(){
-    $("#ddhelperbox").toggle(500);
-  });
-
-  $("#gdhelper").click(function(){
-    $("#gdhelperbox").toggle(500);
-  });
-
   $("#cughelper_dd").click(function(){
     $("#cughelperbox_dd").toggle(500);
   });
@@ -166,10 +158,6 @@ $(document).ready(function(){
 
   $("#brghelper_gd").click(function(){
     $("#brghelperbox_gd").toggle(500);
-  });
-
-  $("#infhelper_gd").click(function(){
-    $("#infhelperbox_gd").toggle(500);
   });
 
   $("#cugtitle").click(function(){

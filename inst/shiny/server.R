@@ -104,28 +104,9 @@ nwinit <- reactive({
     filename <- input$rawdatafile[1,1]
     fileext <- substr(filename,nchar(filename)-3,nchar(filename))
 
-    if(input$filetype == 1){
+    if(input$filetype == 4){
       validate(
-        need(fileext %in% c(".rds", ".Rds", ".RDs", ".RDS"),
-             "Upload an .rds file"))
-      nw_var <- readRDS(paste(filepath))
-    } else if(input$filetype == 2){
-      validate(
-        need(fileext %in% c(".net", ".NET"),
-             "Upload a .net file"))
-      nw_var <- read.paj(paste(filepath))
-    } else if(input$filetype == 3){
-      validate(
-        need(fileext %in% c(".paj",".PAJ"),
-             "Upload a .paj file"))
-      nws <- read.paj(paste(filepath))
-      if(!is.null(pajnws())){
-        nw_var <- nws$networks[[as.numeric(input$choosepajnw)]]
-      }
-    } else if(input$filetype == 4){
-      validate(
-        need(fileext %in% c(".csv",".CSV") |
-               fileext %in% c(".rds", ".Rds", ".RDs", ".RDS"),
+        need(fileext %in% c(".csv",".CSV"),
              "Upload the specified type of matrix"))
       if(fileext %in% c(".csv",".CSV")){
         header <- TRUE
@@ -141,14 +122,6 @@ nwinit <- reactive({
                           matrix.type=input$matrixtype,
                           ignore.eval=FALSE, names.eval='edgevalue')
              })
-
-      } else if(fileext %in% c(".rds", ".Rds", ".RDs", ".RDS")){
-        newmx <- readRDS(paste(filepath))
-        nw_var <- network(newmx,
-                        directed=input$dir, loops=input$loops,
-                        multiple=input$multiple, bipartite=input$bipartite,
-                        matrix.type=input$matrixtype,
-                        ignore.eval=FALSE, names.eval='edgevalue')
 
       }
     }

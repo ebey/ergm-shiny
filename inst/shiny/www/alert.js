@@ -30,6 +30,19 @@ $(document).ready(function(){
     $("#aboutButton").toggleClass("active", false);
   });
 
+  $("#nweltitle").click(function(){
+    $("#nwel").toggle(1000);
+    $("i",this).toggleClass("fa-angle-double-left fa-angle-double-down");
+  });
+  $("#nwformstitle").click(function(){
+    $("#nwforms").toggle(1000);
+    $("i",this).toggleClass("fa-angle-double-left fa-angle-double-down");
+  });
+  $("#nwtypestitle").click(function(){
+    $("#nwtypes").toggle(1000);
+    $("i",this).toggleClass("fa-angle-double-left fa-angle-double-down");
+  });
+
   $("#linktitle1").click(function(){
     $("#linkbox1").toggle(200);
     $("i",this).toggleClass("fa-angle-double-left fa-angle-double-down");

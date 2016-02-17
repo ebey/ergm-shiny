@@ -263,23 +263,21 @@ div.error {
   border-radius: 16px 0 0 16px;
 }
 
-#linkbox1,
-#linkbox2,
-#linkbox3,
-#linkbox4,
-#mixmxbox,
-#cugbox,
+#nwel, #nwtypes,
+#nwforms,
+#linkbox1, #linkbox2,
+#linkbox3, #linkbox4,
+#mixmxbox, #cugbox,
 #graphlevelbox,
 #nodelevelbox {
   display: none;
 }
 
-#linktitle1,
-#linktitle2,
-#linktitle3,
-#linktitle4,
-#mixmxtitle,
-#cugtitle,
+#nweltitle, #nwtypestitle,
+#nwformstitle,
+#linktitle1, #linktitle2,
+#linktitle3, #linktitle4,
+#mixmxtitle, #cugtitle,
 #graphleveltitle,
 #nodeleveltitle {
   cursor: pointer;

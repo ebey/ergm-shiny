@@ -94,7 +94,72 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
             )
             ),
           div(id="basicsbox",
-              p("TEST TEST TEST")
+              h5(strong("Network elements"), icon('angle-double-left'),
+                 id = "nweltitle"),
+              div(id = "nwel",
+                fluidRow(
+                  tags$ul(
+                    tags$li("Nodes/vertices/actors",
+                       tags$ul(
+                         tags$li("Can represent people, countries, organizations, etc."))),
+                    tags$li("Edges/ties/links",
+                       tags$ul(
+                         column(7,
+                         tags$li("The relationship of interest (friendship, advice, business, etc.)"),
+                         tags$li("Can be directed or undirected",
+                            tags$ul(
+                              tags$li("Directed: asymmetric, mutual"))),
+                         tags$li("Can be weighted or binary",
+                            tags$ul(
+                              tags$li("Binary: edge exists or doesn’t (0 or 1)"),
+                              tags$li("Weighted: edge can take one of many values (0, 1, 2.5, etc.)")))
+                         ),
+                         column(5, img(src = "edgetypes.PNG", height = 120))
+                         )
+                       )
+                    )
+
+
+                )
+                ),
+
+              h5(strong("Types of networks"), icon('angle-double-left'),
+                 id = "nwtypestitle"),
+              div(id = "nwtypes",
+                tags$ul(
+                  tags$li("Directed/undirected",
+                    tags$ul(
+                      tags$li("Determined by the types of edges in the network"))),
+                  tags$li("Bipartite (affiliation network)",
+                    tags$ul(
+                      tags$li("A network with two different types of nodes, which cannot have edges among themselves."))),
+                  tags$li("Valued"))
+                ),
+
+                h5(strong("Representing network data"), icon('angle-double-left'),
+                   id = "nwformstitle"),
+                div(id = "nwforms",
+                  tags$ul(
+                    tags$li("Adjacency matrix",
+                      tags$ul(
+                        tags$li("A square matrix with one row and one column for each node."),
+                        tags$li("Each entry in the matrix corresponds to the value of a potential edge."))),
+                    tags$li("Bipartite adjacency matrix",
+                      tags$ul(
+                        tags$li("An adjacency matrix where the rows correspond to one type of node (mode 1) and the columns correspond to the other type (mode 2)."),
+                        tags$li("Doesn’t have to be a square matrix, because there may not be the same number of nodes in mode 1 and 2"))),
+                    tags$li("Edge list",
+                      tags$ul(
+                        tags$li("A two column matrix that lists the origin and termination nodes of every edge."),
+                        tags$li("This format does not include isolates."))),
+                    tags$li("Incidence matrix",
+                      tags$ul(
+                        tags$li("A matrix where the rows correspond to nodes and the columns correspond to edges."),
+                        tags$li("For directed networks, the element in row i, column j is -1 if edge j leaves node i, 1 if edge j enters node i, and 0 otherwise."),
+                        tags$li("For undirected networks, the element in row i, column j is 1 if edge j is incident on node i, and 0 otherwise.")))
+                  )
+                )
+
               )
           ),
    column(4,

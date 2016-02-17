@@ -167,18 +167,25 @@ attr.info <- function(df, colname, numattrs, breaks) {
 }
 
 glossary <- list()
-glossary$vertex <- "A vertex (also known as a node or actor) is the basic element of a network. It can represent a person, country, organization, etc."
-glossary$actor <- "An actor (also known as a node or vertex) is the basic element of a network. It can represent a person, country, organization, etc."
-glossary$node <- "A node (also known as a vertex or actor) is the basic element of a network. It can represent a person, country, organization, etc."
-glossary$edge <- "An edge (also known as a tie or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
-glossary$tie <- "A tie (also known as an edge or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
-glossary$link <- "An link (also known as an edge or a tie) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary."
-glossary$dyad <- "A dyad is a pair of nodes. In a network where the total number of nodes is n, the number of dyads in a directed network is (n-1)*n and in an undirected network is (1/2)*(n-1)*n"
-glossary$degree <- "The degree of a node is equal to the number of edges it has. For directed networks this can be subset by in-degree (the number of edges that point to the node) and out-degree (the number of edges that point away from the node)."
-glossary[["degree distribution"]] <- "The degree distribution is a network-level summary that shows how the edges in a network are distributed among the nodes. The degree distributions of directed graphs can be subset by in-degree or out-degree."
-glossary$geodesic <- 'A geodesic is a dyad-level measure for the shortest possible path between a pair of nodes. If there is no path between a pair of nodes, the geodesic distance is said to be infinite, or "inf" for short.'
-glossary[["geodesic distribution"]] <- "The geodesic distribution is a network-level summary of the geodesics between all possible pairs of nodes."
-glossary[["adjacency matrix"]] <- ""
-glossary[["incidence matrix"]] <- ""
-glossary[["edge list"]] <- ""
-glossary$bipartite <- ""
+glossary$vertex <- c("A vertex (also known as a node or actor) is the basic element of a network. It can represent a person, country, organization, etc.")
+glossary$actor <- c("An actor (also known as a node or vertex) is the basic element of a network. It can represent a person, country, organization, etc.")
+glossary$node <- c("A node (also known as a vertex or actor) is the basic element of a network. It can represent a person, country, organization, etc.")
+glossary$edge <- c("An edge (also known as a tie or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary.")
+glossary$tie <- c("A tie (also known as an edge or a link) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary.")
+glossary$link <- c("An link (also known as an edge or a tie) represents the relationship between two nodes. It can be directed (gets advice from) or undirected (is friends with) and weighted or binary.")
+glossary$dyad <- c("A dyad is a pair of nodes. In a network where the total number of nodes is n, the number of dyads in a directed network is (n-1)*n and in an undirected network is (1/2)*(n-1)*n")
+glossary$degree <- c("The degree of a node is equal to the number of edges it has. For directed networks this can be subset by in-degree (the number of edges that point to the node) and out-degree (the number of edges that point away from the node).")
+glossary[["degree distribution"]] <- c("The degree distribution is a network-level summary that shows how the edges in a network are distributed among the nodes. The degree distributions of directed graphs can be subset by in-degree or out-degree.")
+glossary$geodesic <- c('A geodesic is a dyad-level measure for the shortest possible path between a pair of nodes. If there is no path between a pair of nodes, the geodesic distance is said to be infinite, or "inf" for short.')
+glossary[["geodesic distribution"]] <- c("The geodesic distribution is a network-level summary of the geodesics between all possible pairs of nodes.")
+glossary[["adjacency matrix"]] <- c("One method for representing network data is with an adjacency matrix. These are square matrices with one row for each node and one column for each node. The contents of each cell depend on whether there is an edge between the nodes in the correspond row and column.",
+                                    "For directed networks, an entry in row i and column j represents an edge originating from node i and terminating at node j. Matrices for undirected networks are symmetric around the diagonal (The entry in row i, column j equals the entry in row j, column i).")
+glossary[["incidence matrix"]] <- c("A matrix where the rows correspond to nodes and the columns correspond to edges.",
+                                    "For directed networks, the element in row i, column j is -1 if edge j leaves node i, 1 if edge j enters node i, and 0 otherwise.",
+                                    "For undirected networks, the element in row i, column j is 1 if edge j is incident on node i, and 0 otherwise.")
+glossary[["edge list"]] <- c("A two column matrix that lists the origin and termination nodes of every edge.",
+                             "This format does not include isolates.")
+glossary[["bipartite network"]] <- c("A bipartite network is one with two different types of nodes, where it is impossible for edges to exist between nodes of the same type.",
+                                     "This is sometimes called an affiliation network when the two types of nodes are people and organizations, and the relationship of interest is organization membership.")
+glossary$missing <- "A piece of data is missing if we don't know what value it takes. A missing edge is different than a null edge (one that we know does not exist)."
+glossary$isolate <- "An isolate is a node that is not connected to any other nodes."

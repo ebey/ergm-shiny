@@ -580,7 +580,7 @@ fluidRow(
                            'from one node to another.'))
                ),
       tabPanel('More', value='More', br(),
-               h5('Conditional uniform graph tests', icon('angle-double-left'),
+               h5('Null model tests', icon('angle-double-left'),
                   id="cugtitle"),
                wellPanel(id="cugbox",
                  column(4, uiOutput("dynamiccugterm")),

@@ -132,8 +132,10 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                       tags$li("Determined by the types of edges in the network"))),
                   tags$li("Bipartite (affiliation network)",
                     tags$ul(
-                      tags$li("A network with two different types of nodes, which cannot have edges among themselves."))),
-                  tags$li("Valued"))
+                      tags$li("A network with two different types of nodes, which cannot have edges among themselves"))),
+                  tags$li("Valued",
+                    tags$ul(
+                      tags$li("If the edges in the network are weighted/valued, the whole network is called a valued network"))))
                 ),
 
                 h5(strong("Representing network data"), icon('angle-double-left'),
@@ -142,21 +144,22 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                   tags$ul(
                     tags$li("Adjacency matrix",
                       tags$ul(
-                        tags$li("A square matrix with one row and one column for each node."),
-                        tags$li("Each entry in the matrix corresponds to the value of a potential edge."))),
+                        tags$li("A square matrix with one row and one column for each node"),
+                        tags$li("Each entry in the matrix corresponds to the value of a potential edge"))),
                     tags$li("Bipartite adjacency matrix",
                       tags$ul(
-                        tags$li("An adjacency matrix where the rows correspond to one type of node (mode 1) and the columns correspond to the other type (mode 2)."),
+                        tags$li("An adjacency matrix where the rows correspond to one type of node (mode 1) and the columns correspond to the other type (mode 2)"),
                         tags$li("Doesn’t have to be a square matrix, because there may not be the same number of nodes in mode 1 and 2"))),
                     tags$li("Edge list",
                       tags$ul(
-                        tags$li("A two column matrix that lists the origin and termination nodes of every edge."),
-                        tags$li("This format does not include isolates."))),
+                        tags$li("A two column matrix that lists the origin and termination nodes of every edge"),
+                        tags$li("This format does not include isolates"))),
                     tags$li("Incidence matrix",
                       tags$ul(
-                        tags$li("A matrix where the rows correspond to nodes and the columns correspond to edges."),
-                        tags$li("For directed networks, the element in row i, column j is -1 if edge j leaves node i, 1 if edge j enters node i, and 0 otherwise."),
-                        tags$li("For undirected networks, the element in row i, column j is 1 if edge j is incident on node i, and 0 otherwise.")))
+                        tags$li("A matrix where the rows correspond to nodes and the columns correspond to edges"),
+                        tags$li("For directed networks, the element in row i, column j is -1 if edge j leaves node i, 1 if edge j enters node i, and 0 otherwise"),
+                        tags$li("For undirected networks, the element in row i, column j is 1 if edge j is connected to node i, and 0 otherwise"),
+                        tags$li("Since a single edge can only be connected to two nodes, each column can only have two non-zero entries")))
                   )
                 )
 
@@ -256,7 +259,8 @@ fluidRow(
       tabPanel('Upload Network', br(),
         wellPanel(
            p("Choose a network to load in the dropdown menu below, or",
-             "upload a new .csv file with network data."), br(),
+             "switch file types to upload a new .csv file with network data."),
+           br(),
            fluidRow(
              column(6,
                     selectInput('filetype',label='Switch file type',

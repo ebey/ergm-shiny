@@ -1072,6 +1072,8 @@ output$nwsum <- renderPrint({
     }else{
       cat("   ",ean,"\n")
     }
+  } else {
+    cat("No network loaded")
   }
 })
 
@@ -1120,6 +1122,8 @@ output$nwsum2 <- renderPrint({
     }else{
       cat("   ",ean,"\n")
     }
+  } else {
+    cat("No network loaded")
   }
 })
 

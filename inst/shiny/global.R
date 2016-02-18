@@ -189,3 +189,12 @@ glossary[["bipartite network"]] <- c("A bipartite network is one with two differ
                                      "This is sometimes called an affiliation network when the two types of nodes are people and organizations, and the relationship of interest is organization membership.")
 glossary$missing <- "A piece of data is missing if we don't know what value it takes. A missing edge is different than a null edge (one that we know does not exist)."
 glossary$isolate <- "An isolate is a node that is not connected to any other nodes."
+glossary$homophily <- "The tendency for nodes to form ties with others that have similar characteristics. For example, friendship networks among students might display homophily within age group."
+glossary$transitivity <- "The tendency to close triangles when two edges already exist. For example, the notion that the friend of my friend is my friend."
+glossary$hub <- "A hub is a node with many links"
+glossary[["empty network"]] <- ""
+glossary[["complete network"]] <- ""
+glossary$adjacent <- ""
+glossary$incident <- ""
+glossary$neighbor <- ""
+

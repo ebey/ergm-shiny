@@ -12,6 +12,8 @@ data(samplk)
 data(ecoli)
 data(molecule)
 data(kapferer)
+load("PlanningDiagnostics_Advice")
+load("PlanningDiagnostics_Budgets")
 
 BRGcol <- "darkred"
 CUGcol <- "darkorange"
@@ -1259,21 +1261,21 @@ output$nwplot <- renderPlot({
 
 })
 
-observeEvent({c(input$plot_click, input$plot_dblclick)}, {
-  values$clickedpoints <- nearPoints(nwdf(), input$plot_click,
-                                     xvar = "cx", yvar = "cy",
-                                     threshold = 10, maxpoints = 1)
-})
-observeEvent(input$plot_hover, {
-  values$hoverpoints <- nearPoints(nwdf(), input$plot_hover,
-                                   xvar = "cx", yvar = "cy",
-                                   threshold = 10, maxpoints = 1)
-})
-observeEvent({c(input$plot_dblclick, input$plot_click)}, {
-  values$dblclickpoints <- nearPoints(nwdf(), input$plot_dblclick,
-                                      xvar = "cx", yvar = "cy",
-                                      threshold = 10, maxpoints = 1)
-})
+# observeEvent({c(input$plot_click, input$plot_dblclick)}, {
+#   values$clickedpoints <- nearPoints(nwdf(), input$plot_click,
+#                                      xvar = "cx", yvar = "cy",
+#                                      threshold = 10, maxpoints = 1)
+# })
+# observeEvent(input$plot_hover, {
+#   values$hoverpoints <- nearPoints(nwdf(), input$plot_hover,
+#                                    xvar = "cx", yvar = "cy",
+#                                    threshold = 10, maxpoints = 1)
+# })
+# observeEvent({c(input$plot_dblclick, input$plot_click)}, {
+#   values$dblclickpoints <- nearPoints(nwdf(), input$plot_dblclick,
+#                                       xvar = "cx", yvar = "cy",
+#                                       threshold = 10, maxpoints = 1)
+# })
 observeEvent(nwinit(), {
   values$clickedpoints <- NULL
   values$dblclickedpoints <- NULL

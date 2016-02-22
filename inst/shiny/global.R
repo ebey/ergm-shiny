@@ -197,4 +197,10 @@ glossary[["complete network"]] <- ""
 glossary$adjacent <- ""
 glossary$incident <- ""
 glossary$neighbor <- ""
+glossary$betweenness <- ""
+glossary$directed <- ""
+glossary$undirected <- ""
+glossary$attribute <- ""
+glossary$triangle <- ""
+
 

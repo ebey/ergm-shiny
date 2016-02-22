@@ -9,14 +9,14 @@ library(statnetWeb)
 shinyUI(
   navbarPage(
     title=NULL,
-    id= 'navbar', windowTitle = 'statnetWeb ADP', collapsible=TRUE,
+    id= 'navbar', windowTitle = 'statnetWeb PATH', collapsible=TRUE,
 
 
 
 # Front Page (About) ------------------------------------------------------
 
 
-tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
+tabPanel(title=span('statnetWeb PATH', id="sWtitle"),
          value='tab1',
          fluidRow(
           column(2,
@@ -31,13 +31,15 @@ tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
           ),
    column(6, style="padding: 0 30px 0 0;",
           div(id="aboutbox",
+            p("About statnetWeb", style = "font-size: 18px;"),
+            hr(),
             p(strong("Welcome to the statnetWeb PATH web application!")),
             p("statnetWeb PATH is an interactive application for exploring and analyzing network data."),
-            p("Click on", strong("Get Started"), "to explore and analyze your",
-              "project’s data or to upload network data from other projects."),
-
             p("Click on", strong("Network Basics"), "to learn some of the basic",
               "terminology for network analysis"),
+            p("Click on", strong("Get Started"), "to move to the data page and",
+              "choose a network from the ADP Linkages project, or to upload",
+              "network data from other projects."),
             br(), p("INSERT NW PICTURE", style = "color:red;"),
             p("statnetWeb is built using RShiny, which allows you to analyze",
               "your data in R without having to know anything about R! This",
@@ -48,6 +50,8 @@ tabPanel(title=span('statnetWeb ADP', id="sWtitle"),
               "to ebeylerian@path.org (see", actionLink("helpLink", "Help"), "tab).")
           ),
           div(id="citebox",
+              p("Citing statnetWeb", style = "font-size: 18px;"),
+              hr(),
             tabsetPanel(
               tabPanel("BibTeX",
 p(strong("statnet")),
@@ -59,9 +63,9 @@ tags$pre(id='scitation','@Manual{handcock:statnet,
   url = {http://statnetproject.org}
 }'),
 
-p(strong("statnetWeb ADP")),
-tags$pre(id='swcitation',"@Manual{beylerian:statnetWeb-ADP,
-  title = {\\pkg{statnetWeb-ADP}: Network Analysis for the Access and Delivery Partnership},
+p(strong("statnetWeb PATH")),
+tags$pre(id='swcitation',"@Manual{beylerian:statnetWeb-PATH,
+  title = {\\pkg{statnetWeb-PATH}: Network Analysis for the Access and Delivery Partnership},
   author = {Emily N. Beylerian and Samuel Jenness and Kirk Li and Martina Morris},
   year = {2015},
   note = {\\proglang{R}~package version~0.1.0},
@@ -75,9 +79,9 @@ tags$pre("Mark S. Handcock, David R. Hunter, Carter T. Butts, Steven M. Goodreau
 Martina Morris (2003). statnet: Software tools for the Statistical Modeling
 of Network Data. URL http://statnetproject.org"),
 
-p(strong("statnetWeb ADP")),
+p(strong("statnetWeb PATH")),
 tags$pre("Emily N. Beylerian, Samuel Jenness, Kirk Li, and Martina Morris (2016).
-statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
+statnetWeb PATH: Network Analysis for the Access and Delivery Partnership.")
                        )
             ),
 
@@ -97,6 +101,11 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
             )
             ),
           div(id="basicsbox",
+              p("Network Basics", style = "font-size: 18px;"),
+              hr(),
+              p('Networks are made up of “nodes,” connected by “edges.”',
+                'The structure formed by these connections is the network.'),
+              p("Click below to learn more about each topic."), br(),
               h5(strong("Network elements"), icon('angle-double-left'),
                  id = "nweltitle"),
               div(id = "nwel",
@@ -197,7 +206,7 @@ statnetWeb ADP: Network Analysis for the Access and Delivery Partnership.")
                         target = "_blank")),
                     style="margin-bottom:10px;"),
               br(),
-              div(a("statnetWeb ADP on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
+              div(a("statnetWeb PATH on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
                     target="_blank"))
    ),
    fluidRow(a(img(src = '00550.jpg', width = 100),
@@ -262,7 +271,13 @@ fluidRow(
       tabPanel('Upload Network', br(),
         wellPanel(
            p("Choose a network to load in the dropdown menu below, or",
-             "switch file types to upload a new .csv file with network data."),
+             "switch file types to upload a new .csv file with network data.",
+             "When you choose a network from the dropdown it will load the",
+             "network and the nodal attributes. You can explore both of these",
+             "on the Network Descriptives page."),
+           p("Once you have loaded a network, you will see the descriptive",
+             "summary of your network to the right. Use the glossary below the",
+             "summary to learn what each metric means."),
            br(),
            fluidRow(
              column(6,
@@ -471,18 +486,6 @@ fluidRow(
            )
            )
          )
-# tabPanel('Modify Attributes', br(),
-#          wellPanel(
-#            p('In the future we will build in functions that will ',
-#              'allow you to modify the attributes of your network.',
-#              'This will include options like:'),
-#            tags$ul(
-#              tags$li('Applying a function (e.g.', code('sqrt()'), ') to an attribute'),
-#              tags$li('Recoding (mapping a set of attributes onto a new set)'),
-#              tags$li('Conditional transformations (', code('do...if...'),')'))
-#            #uiOutput('modifyattrchooser')
-#            )
-#          )
   )
 ),
 
@@ -1444,7 +1447,7 @@ tabPanel(title='Help', value='tab8',
                                       target = "_blank")),
                                 style="margin-bottom:10px;"),
                          br(),
-                         div(a("statnetWeb ADP on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
+                         div(a("statnetWeb PATH on GitHub", href="https://github.com/ebey/statnetWeb-ADP",
                                target="_blank"))
                        ),
                        mainPanel(

@@ -3,6 +3,9 @@
 .navbar-nav > li > a {padding-top: 0; padding-bottom: 0; line-height: 40px; height: 40px;}
 .navbar {min-height:40px; height:40px;}
 
+hr {
+  border-top: 1px solid #666666;
+}
 
 .codetxt {
   color: #333333;

@@ -520,9 +520,17 @@ nodebetw <- reactive({
     gmode <- 'graph'
     cmode <- 'undirected'
   }
-  sna::betweenness(nw(), gmode=gmode, diag=has.loops(nw()),
+  sna::betweenness(nw(), gmode=gmode, diag=has.loops(nw()), cmode=cmode)
+})
 
-              cmode=cmode)
+nodedeg <- reactive({
+  if(!is.network(nw())){return()}
+  if(is.directed(nw())){
+    gmode <- 'digraph'
+  } else {
+    gmode <- 'graph'
+  }
+  sna::degree(nw(), gmode=gmode, diag=has.loops(nw()), cmode="freeman")
 })
 
 nodesize <- reactive({
@@ -535,6 +543,10 @@ nodesize <- reactive({
     minsize <- min(nodebetw())
     maxsize <- max(nodebetw())
     size <- (nodebetw()-minsize)/(maxsize-minsize)*(3.5-.7)+.7
+  } else if (input$sizeby == 'Degree') {
+    minsize <- min(nodedeg())
+    maxsize <- max(nodedeg())
+    size <- (nodedeg()-minsize)/(maxsize-minsize)*(3.5-.7)+.7
   } else {
     minsize <- min(get.vertex.attribute(nw_var,input$sizeby))
     maxsize <- max(get.vertex.attribute(nw_var,input$sizeby))
@@ -905,6 +917,25 @@ nodebetw2 <- reactive({
   return(b)
 })
 
+nodedeg2 <- reactive({
+  if(input$nsims==1){
+    if(is.directed(allmodelsimreac())){
+      gmode <- "digraph"
+    } else {
+      gmode <- "graph"
+    }
+    b <- sna::degree(allmodelsimreac(), gmode=gmode, cmode="freeman")
+  } else {
+    if(is.directed(allmodelsimreac()[[input$thissim]])){
+      gmode <- "digraph"
+    } else {
+      gmode <- "graph"
+    }
+    b <- sna::degree(allmodelsimreac()[[input$thissim]], gmode=gmode, cmode="freeman")
+  }
+  return(b)
+})
+
 nodesize2 <- reactive({
   nw_var <- nw()
   #scale size of nodes onto range between .7 and 3.5
@@ -914,6 +945,10 @@ nodesize2 <- reactive({
     minsize <- min(nodebetw2())
     maxsize <- max(nodebetw2())
     size <- (nodebetw2()-minsize)/(maxsize-minsize)*(3.5-.7)+.7
+  } else if (input$sizeby2 == "Degree") {
+    minsize <- min(nodedeg2())
+    maxsize <- max(nodedeg2())
+    size <- (nodedeg2()-minsize)/(maxsize-minsize)*(3.5-.7)+.7
   } else {
     minsize <- min(get.vertex.attribute(nw_var,input$sizeby2))
     maxsize <- max(get.vertex.attribute(nw_var,input$sizeby2))
@@ -1169,7 +1204,7 @@ outputOptions(output,'attrlevels', suspendWhenHidden=FALSE, priority=10)
 output$dynamicsize <- renderUI({
   selectInput('sizeby',
               label = NULL,
-              c('None' = 1, 'Betweenness', numattr()))
+              c('None' = 1, 'Betweenness', 'Degree', numattr()))
 })
 outputOptions(output,'dynamicsize',suspendWhenHidden=FALSE)
 
@@ -3603,7 +3638,7 @@ outputOptions(output,'dynamiccolor2',suspendWhenHidden=FALSE, priority=10)
 output$dynamicsize2 <- renderUI({
   selectInput('sizeby2',
               label = 'Size vertices according to:',
-              c('None' = 1, 'Betweenness',numattr()))
+              c('None' = 1, 'Betweenness', 'Degree', numattr()))
 })
 
 

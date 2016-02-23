@@ -493,13 +493,15 @@ numattr <- reactive({
 nwdf <- reactive({
   if(is.network(nw())){
     attrs <- menuattr()
-    if(is.na(as.numeric(network.vertex.names(nw()))[1])){
+    if(is.na(as.numeric(network.vertex.names(nw())[1]))){
       df <- data.frame(Names = network.vertex.names(nw()))
     } else {
       df <- data.frame(Names = as.numeric(network.vertex.names(nw())))
     }
-    for(i in seq(length(attrs))){
-      df[[attrs[i]]] <- get.vertex.attribute(nw(), attrs[i])
+    if(length(attrs) > 0){
+      for(i in seq(length(attrs))){
+        df[[attrs[i]]] <- get.vertex.attribute(nw(), attrs[i])
+      }
     }
     df[["Missing"]] <- get.vertex.attribute(nw(), "na")
     df[["cx"]] <- coords()[,1]
@@ -1197,13 +1199,6 @@ output$nwplot <- renderPlot({
   }
 
   if(input$activeplot == "Interactive Plot"){
-    if(!is.null(values$hoverpoints)){
-      if(nrow(values$hoverpoints) > 0){
-        nhov <- as.numeric(rownames(values$hoverpoints))
-        vcex <- rep(1, nodes())
-        vcex[nhov] <- 2
-      }
-    }
     if(!is.null(values$clickedpoints)){
       if(nrow(values$clickedpoints) > 0){
         nclick <- as.numeric(rownames(values$clickedpoints))
@@ -1212,19 +1207,6 @@ output$nwplot <- renderPlot({
         ecolor <- "lightgrey"
         vborder <- rep("lightgrey", nodes())
         vborder[nclick] <- 1
-      }
-    }
-    if(!is.null(values$dblclickpoints)){
-      if(nrow(values$dblclickpoints) > 0){
-        ndbl <- as.numeric(rownames(values$dblclickpoints))
-        neighb <- nw()[ndbl,] == 1
-        color <- adjustcolor(vcol(), alpha.f = 0.4)
-        color[ndbl] <- vcol()[ndbl]
-        ecolor <- rep("lightgrey", nedgesinit())
-        ecolor[apply(elist(), MARGIN = 1, FUN = function(x){any(x == ndbl)})] <- "black"
-        vborder <- rep("lightgrey", nodes())
-        vborder[neighb] <- "black"
-        vborder[ndbl] <- "black"
       }
     }
   }
@@ -1263,24 +1245,14 @@ output$nwplot <- renderPlot({
 
 })
 
-# observeEvent({c(input$plot_click, input$plot_dblclick)}, {
-#   values$clickedpoints <- nearPoints(nwdf(), input$plot_click,
-#                                      xvar = "cx", yvar = "cy",
-#                                      threshold = 10, maxpoints = 1)
-# })
-# observeEvent(input$plot_hover, {
-#   values$hoverpoints <- nearPoints(nwdf(), input$plot_hover,
-#                                    xvar = "cx", yvar = "cy",
-#                                    threshold = 10, maxpoints = 1)
-# })
-# observeEvent({c(input$plot_dblclick, input$plot_click)}, {
-#   values$dblclickpoints <- nearPoints(nwdf(), input$plot_dblclick,
-#                                       xvar = "cx", yvar = "cy",
-#                                       threshold = 10, maxpoints = 1)
-# })
+observeEvent({input$plot_click}, {
+  values$clickedpoints <- nearPoints(nwdf(), input$plot_click,
+                                     xvar = "cx", yvar = "cy",
+                                     threshold = 10, maxpoints = 1)
+})
+
 observeEvent(nwinit(), {
   values$clickedpoints <- NULL
-  values$dblclickedpoints <- NULL
 })
 
 output$nwplotdownload <- downloadHandler(

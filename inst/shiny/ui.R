@@ -535,8 +535,6 @@ fluidRow(
       tabPanel('Network Plot', br(),
                 plotOutput('nwplot', click = "plot_click",
                            dblclick = dblclickOpts(id = "plot_dblclick"),
-                           hover = hoverOpts(id = "plot_hover", delay = 100,
-                                             delayType = "throttle"),
                            brush = brushOpts(id = "plot_brush")
                            )
         ),
@@ -784,7 +782,7 @@ fluidRow(
                 conditionalPanel(condition='input.plottabs == "Network Plot"',
                    strong("Static or interactive plot?"),
                    helpText("On the interactive plot, click to see Node ID and
-                            attributes. Double click to highlight neighbors.",
+                            attributes.",
                             class = "nomarg"),
                    selectInput('activeplot', label = NULL,
                                choices = c("Static Plot",

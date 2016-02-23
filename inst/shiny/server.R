@@ -1056,7 +1056,9 @@ output$nwsum <- renderPrint({
 
     cat("  density =", sna::gden(dat = nw_var, diag = input$loops,
                                  mode = gmode), "\n")
-    cat("  centralization =", "\n")
+    cat("  degree centralization =", sna::centralization(dat = nw_var,
+                                                         FUN = sna::degree,
+                                                         mode = gmode), "\n")
     cat("  triangles =", summary(nw_var ~ triangle), "\n")
     cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 
@@ -1107,7 +1109,9 @@ output$nwsum2 <- renderPrint({
 
     cat("  density =", sna::gden(dat = nw_var, diag = input$loops,
                                  mode = gmode), "\n")
-    cat("  centralization =", "\n")
+    cat("  degree centralization =", sna::centralization(dat = nw_var,
+                                                         FUN = sna::degree,
+                                                         mode = gmode), "\n")
     cat("  triangles =", summary(nw_var ~ triangle), "\n")
     cat("  isolates =", summary(nw_var ~ isolates), "\n\n")
 

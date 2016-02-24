@@ -780,13 +780,6 @@ fluidRow(
        tabPanel(title='Display Options', br(),
           wellPanel(
                 conditionalPanel(condition='input.plottabs == "Network Plot"',
-                   strong("Static or interactive plot?"),
-                   helpText("On the interactive plot, click to see Node ID and
-                            attributes.",
-                            class = "nomarg"),
-                   selectInput('activeplot', label = NULL,
-                               choices = c("Static Plot",
-                                           "Interactive Plot")),
 
                    checkboxInput('iso',
                                  label = 'Display isolates',
@@ -806,6 +799,10 @@ fluidRow(
                    helpText("Choose a nodal attribute to color code the nodes.",
                             class = "nomarg"),
                    uiOutput("dynamiccolor"),
+                   strong("Color edges:"),
+                   helpText("Choose an edge attribute to color code edges.",
+                            class = "nomarg"),
+                   uiOutput("dynamiccolor_edge"),
                    conditionalPanel(condition="Number(output.attrlevels) > 9",
                      column(10,
                             p(id = "closewarning1", icon(name = "remove"), class = "warning"),

@@ -572,6 +572,18 @@ vcol <- reactive({
   vcol
 })
 
+#edge color
+ecol <- reactive({
+  if(!is.network(nw())){return()}
+  nw_var <- nw()
+  if(input$colorby_edge == 1){
+    ecol <- rep(1, network.edgecount(nw_var))
+  } else {
+    ecol <- get.edge.attribute(nw_var, attrname = input$colorby_edge)
+  }
+  ecol
+})
+
 legendlabels <- reactive({
   if(!is.network(nw())){return()}
   nw_var <- nw()
@@ -1193,6 +1205,13 @@ outputOptions(output,'attrlevels', suspendWhenHidden=FALSE, priority=10)
 #     "document.getElementById('closewarning1').style.display = 'block'"))
 # })
 
+output$dynamiccolor_edge <- renderUI({
+  selectInput('colorby_edge',
+              label = NULL,
+              c('None' = 1, list.edge.attributes(nw())))
+})
+outputOptions(output,'dynamiccolor_edge', suspendWhenHidden=FALSE, priority=10)
+
 output$dynamicsize <- renderUI({
   selectInput('sizeby',
               label = NULL,
@@ -1219,7 +1238,7 @@ output$nwplot <- renderPlot({
 
   nw_var <- nw()
   color <- adjustcolor(vcol(), alpha.f = input$transp)
-  ecolor <- 1
+  ecolor <- ecol()
   vborder <- 1
   vcex <- nodesize()
   if(is.bipartite(nw())){
@@ -1229,16 +1248,14 @@ output$nwplot <- renderPlot({
     sides <- 50
   }
 
-  if(input$activeplot == "Interactive Plot"){
-    if(!is.null(values$clickedpoints)){
-      if(nrow(values$clickedpoints) > 0){
-        nclick <- as.numeric(rownames(values$clickedpoints))
-        color <- adjustcolor(vcol(), alpha.f = 0.4)
-        color[nclick] <- vcol()[nclick]
-        ecolor <- "lightgrey"
-        vborder <- rep("lightgrey", nodes())
-        vborder[nclick] <- 1
-      }
+  if(!is.null(values$clickedpoints)){
+    if(nrow(values$clickedpoints) > 0){
+      nclick <- as.numeric(rownames(values$clickedpoints))
+      color <- adjustcolor(vcol(), alpha.f = 0.4)
+      color[nclick] <- vcol()[nclick]
+      ecolor <- adjustcolor(ecol(), alpha.f = 0.40)
+      vborder <- rep("lightgrey", nodes())
+      vborder[nclick] <- 1
     }
   }
 
@@ -1256,21 +1273,19 @@ output$nwplot <- renderPlot({
            fill = legendfill(), bty='n')
   }
 
-  if(input$activeplot == "Interactive Plot"){
-    if(!is.null(values$clickedpoints)){
-      if(nrow(values$clickedpoints) > 0){
-        #isolate(legend("topleft",
-        #               legend = values$clickedpoints[, c("Names", menuattr())]))
-        cx <- values$clickedpoints[, "cx"]
-        cy <- values$clickedpoints[, "cy"]
-        name <- values$clickedpoints[, "Names"]
-        attrlabel <- paste("\n", menuattr())
-        text(x = cx, y = cy,
-             labels = paste0(name,
-                             paste(attrlabel, values$clickedpoints[, menuattr()],
-                                   collapse = "")),
-             pos = 4, offset = 1)
-      }
+  if(!is.null(values$clickedpoints)){
+    if(nrow(values$clickedpoints) > 0){
+      #isolate(legend("topleft",
+      #               legend = values$clickedpoints[, c("Names", menuattr())]))
+      cx <- values$clickedpoints[, "cx"]
+      cy <- values$clickedpoints[, "cy"]
+      name <- values$clickedpoints[, "Names"]
+      attrlabel <- paste("\n", menuattr())
+      text(x = cx, y = cy,
+           labels = paste0(name,
+                           paste(attrlabel, values$clickedpoints[, menuattr()],
+                                 collapse = "")),
+           pos = 4, offset = 1)
     }
   }
 
@@ -1296,6 +1311,7 @@ output$nwplotdownload <- downloadHandler(
                  displayisolates = input$iso,
                  displaylabels = input$vnames,
                  vertex.col = color,
+                 edge.col = ecol(),
                  vertex.cex = nodesize())
     if(input$colorby != 2){
       legend('bottomright', title=input$colorby, legend = legendlabels(),

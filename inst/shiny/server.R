@@ -4,16 +4,8 @@ library(RColorBrewer)
 library(lattice)
 library(latticeExtra)
 
-data(faux.mesa.high)
-#data(faux.magnolia.high)
-data(florentine)
-data(sampson)
-data(samplk)
-data(ecoli)
-data(molecule)
-data(kapferer)
-load("PlanningDiagnostics_Advice")
-load("PlanningDiagnostics_Budgets")
+load("PlanningDiagnostics_InfoExchange")
+load("PlanningMedicines_InfoExchange")
 
 BRGcol <- "darkred"
 CUGcol <- "darkorange"

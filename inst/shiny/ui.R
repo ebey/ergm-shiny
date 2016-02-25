@@ -40,7 +40,8 @@ tabPanel(title=span('statnetWeb PATH', id="sWtitle"),
             p("Click on", strong("Get Started"), "to move to the data page and",
               "choose a network from the ADP Linkages project, or to upload",
               "network data from other projects."),
-            br(), p("INSERT NW PICTURE", style = "color:red;"),
+            br(),
+            p(img(src = "fmh.png", width = 200), align = "center"),
             p("statnetWeb is built using RShiny, which allows you to analyze",
               "your data in R without having to know anything about R! This",
               "application is the result of a collaboration between PATH and",
@@ -326,10 +327,13 @@ fluidRow(
                 column(6,
                     selectizeInput('samplenet', label="Choose a network",
                                 choices=c("No network chosen" = '',
-                                          'PlanningDiagnostics_InfoExchange',
-                                          'PlanningMedicines_InfoExchange',
-                                          'Uganda_HPV_information',
-                                          'Uganda_HPV_work'))
+                                          "Planinng Diagnostics Info Exchange" =
+                                            'PlanningDiagnostics_InfoExchange',
+                                          "Planning Medicines Info Exchange" =
+                                            'PlanningMedicines_InfoExchange',
+                                          "Uganda HPV Information" =
+                                            'Uganda_HPV_information',
+                                          "Uganda HPV Work" = 'Uganda_HPV_work'))
                 )
                )
              )

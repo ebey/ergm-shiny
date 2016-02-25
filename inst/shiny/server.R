@@ -456,7 +456,7 @@ attrib <- reactive({
     if(is.network(nw())){
 		    attr<-list.vertex.attributes(nw())
     }
-      attr
+      attr[-which(attr == "na")]
   })
 
 #don't allow "na" or "vertex.names" as vertex attributes in menus on fit tab
@@ -1208,9 +1208,12 @@ outputOptions(output,'attrlevels', suspendWhenHidden=FALSE, priority=10)
 # })
 
 output$dynamiccolor_edge <- renderUI({
+
+  eattr <- list.edge.attributes(nw())
+  eattr <- eattr[-which(eattr == "na")]
   selectInput('colorby_edge',
               label = NULL,
-              c('None' = 1, list.edge.attributes(nw())))
+              c('None' = 1, eattr))
 })
 outputOptions(output,'dynamiccolor_edge', suspendWhenHidden=FALSE, priority=10)
 

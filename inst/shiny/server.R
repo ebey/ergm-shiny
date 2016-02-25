@@ -6,6 +6,8 @@ library(latticeExtra)
 
 load("PlanningDiagnostics_InfoExchange")
 load("PlanningMedicines_InfoExchange")
+load("Uganda_HPV_information")
+load("Uganda_HPV_work")
 
 BRGcol <- "darkred"
 CUGcol <- "darkorange"

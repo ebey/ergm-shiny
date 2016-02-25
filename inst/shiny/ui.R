@@ -328,11 +328,8 @@ fluidRow(
                                 choices=c("No network chosen" = '',
                                           'PlanningDiagnostics_InfoExchange',
                                           'PlanningMedicines_InfoExchange',
-                                          'ecoli1', 'ecoli2',
-                                          'faux.mesa.high','flobusiness',
-                                          'flomarriage', 'kapferer', 'kapferer2',
-                                          'molecule', 'samplike', 'samplk1',
-                                          'samplk2', 'samplk3'))
+                                          'Uganda_HPV_information',
+                                          'Uganda_HPV_work'))
                 )
                )
              )

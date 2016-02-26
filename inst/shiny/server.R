@@ -589,27 +589,32 @@ ecol <- reactive({
 legendlabels <- reactive({
   if(!is.network(nw())){return()}
   nw_var <- nw()
-    if(input$colorby == 2){
-      legendlabels <- NULL
-    }else{
+  legendlabels <- NULL
+  edgelabels <- NULL
+    if(input$colorby != 2){
       legendlabels <- sort(unique(get.vertex.attribute(nw_var, input$colorby)))
       if(is.element("Other", legendlabels)){
         legendlabels <- legendlabels[-which(legendlabels=="Other")]
         legendlabels <- c(legendlabels, "Other")
       }
     }
-    legendlabels
+  if(input$colorby_edge != 1){
+    edgelabels <- sort(unique(get.edge.attribute(nw_var, input$colorby_edge)))
+  }
+    legendlabels <- c(legendlabels, edgelabels)
   })
 
 legendfill <- reactive({
   if(input$colorby == 2){
     legendfill <- NULL
   } else {
-    n <- length(legendlabels())
+    n <- length(unique(get.vertex.attribute(nw(), input$colorby)))
     pal <- c('red', 'blue', 'green3', 'cyan', 'magenta3',
              'yellow', 'orange', 'black', 'grey')
     if(n>9){
       pal <- colorRampPalette(brewer.pal(11,"RdYlBu"))(n)
+    } else {
+      pal <- pal[seq(n)]
     }
     legendfill <- adjustcolor(pal, alpha.f = input$transp)
   }
@@ -1195,7 +1200,7 @@ outputOptions(output,'dynamiccolor', suspendWhenHidden=FALSE, priority=10)
 
 # need this to know when color palette will change
 output$attrlevels <- renderText({
-  return(length(legendlabels()))
+  return(length(legendfill()))
 })
 outputOptions(output,'attrlevels', suspendWhenHidden=FALSE, priority=10)
 
@@ -1244,6 +1249,7 @@ output$nwplot <- renderPlot({
   nw_var <- nw()
   color <- adjustcolor(vcol(), alpha.f = input$transp)
   ecolor <- ecol()
+  ecolor[ecolor == 0] <- "lightgrey"
   vborder <- 1
   vcex <- nodesize()
   if(is.bipartite(nw())){
@@ -1273,9 +1279,31 @@ output$nwplot <- renderPlot({
                vertex.sides = sides,
                vertex.cex = vcex,
                edge.col = ecolor)
-  if(input$colorby != 2){
-    legend('bottomright', title = input$colorby, legend = legendlabels(),
-           fill = legendfill(), bty='n')
+
+  if(input$colorby != 2 | input$colorby_edge != 1){
+    ltitle <- ""
+    lborder <- c()
+    lfill <- c()
+    lecol <- NULL
+    lty <- c()
+    if(input$colorby != 2){
+      ltitle <- input$colorby
+      lborder <- rep("black", length(legendfill()))
+      lfill <- legendfill()
+      lty <- c(lty, rep(0, length(legendfill())))
+    }
+    if(input$colorby_edge != 1){
+      lecol <- sort(unique(ecol()))
+      lecol[lecol == 0] <- "lightgrey"
+      lborder <- c(lborder, rep(0, length(lecol)))
+      lfill <- c(lfill, rep(0, length(lecol)))
+      lty <- c(lty, rep(1, length(lecol)))
+    }
+
+    legend('bottomright', title = ltitle, legend = legendlabels(),
+           fill = lfill, bty='n', lty = lty, col = lecol,
+           border = lborder, merge = TRUE)
+
   }
 
   if(!is.null(values$clickedpoints)){

@@ -475,9 +475,9 @@ menuattr <- reactive({
 numattr <- reactive({
     numattr <- c()
     if(is.network(nw())){
-      for(i in 1:length(attrib())){
-        if(is.numeric(get.vertex.attribute(nw(),attrib()[i]))){
-          numattr <- append(numattr,attrib()[i])
+      for(i in 1:length(menuattr())){
+        if(is.numeric(get.vertex.attribute(nw(),menuattr()[i]))){
+          numattr <- append(numattr, menuattr()[i])
         }
       }}
     numattr
@@ -1194,7 +1194,7 @@ output$glossout3 <- renderText({
 output$dynamiccolor <- renderUI({
   selectInput('colorby',
               label = NULL,
-              c('None' = 2, attrib()))
+              c('None' = 2, menuattr()))
 })
 outputOptions(output,'dynamiccolor', suspendWhenHidden=FALSE, priority=10)
 
@@ -3671,7 +3671,7 @@ output$simstatsplotdownload <- downloadHandler(
 output$dynamiccolor2 <- renderUI({
   selectInput('colorby2',
               label = 'Color vertices according to:',
-              c('None' = 2, attrib()),
+              c('None' = 2, menuattr()),
               selected = 2)
 })
 outputOptions(output,'dynamiccolor2',suspendWhenHidden=FALSE, priority=10)

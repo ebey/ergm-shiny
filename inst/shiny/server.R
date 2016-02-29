@@ -1405,11 +1405,10 @@ output$attrhist <- renderPlot({
       if(input$attrhistaxis == "percent"){
         tab <- tab/sum(tab)
       }
-      barplot(tab, main = attrname, col = histblue)
+      barplot(tab, main = attrname, col = histblue, axisnames = TRUE)
     }
   } else {
-    r <- ceiling(nplots/2)
-    par(mfrow = c(r, 2))
+    par(mfrow = c(nplots, 1))
     for(a in attrname){
       lvls <- length(unique(nwdf()[[a]]))
       if(input$attrhistaxis == "density" & a %in% numattr() & lvls > 9){
@@ -1420,7 +1419,8 @@ output$attrhist <- renderPlot({
         if(input$attrhistaxis == "percent"){
           tab <- tab/sum(tab)
         }
-        barplot(tab, main = a, col = histblue)
+        barplot(tab, main = a, col = histblue, cex.axis = 1.4, cex.names = 1.4,
+                axisnames = TRUE)
       }
     }
   }
@@ -1428,8 +1428,7 @@ output$attrhist <- renderPlot({
 
 output$attrhistplotspace <- renderUI({
   nplots <- length(input$attrcols)
-  r <- ceiling(nplots/2)
-  h <- ifelse(r == 1, 400, r * 300)
+  h <- ifelse(nplots == 1, 400, nplots * 300)
   plotOutput("attrhist", height = h)
 })
 

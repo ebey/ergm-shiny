@@ -548,14 +548,10 @@ fluidRow(
                                 ),
                conditionalPanel('input.attrview == "Plot summaries"',
                                 tags$label("Type of plots"),
-                                helpText("Density plots will only be created for",
-                                         "numeric attributes with more than nine",
-                                         "levels."),
                                 selectInput("attrhistaxis",
                                             label = NULL,
                                             choices = c("Barplot: counts" = "count",
-                                                        "Barplot: percents" = "percent",
-                                                        "Density plot" = "density")),
+                                                        "Barplot: percents" = "percent")),
                                 uiOutput("attrhistplotspace"))
 
                ),
@@ -883,6 +879,18 @@ fluidRow(
                                  actionButton("percButton_gd", "Percent of vertex pairs",
                                               class="btn-sm"),
                                  br(), br(),
+                                 strong("Unreachable nodes"),
+                                 helpText("A pair of nodes without any path connecting",
+                                          'it has a geodesic distance of "inf".',
+                                          class = "nomarg"),
+                                 verbatimTextOutput('infsummary'),
+                                 fluidRow(
+                                   column(10,
+                                          checkboxInput('excludeInfs',
+                                                        label=span('Exclude "inf"s from plot'),
+                                                        value=FALSE))
+                                 ),
+                                 br(),
                                  tags$label('Expected values of null models:'),
                                  helpText("Null models are used to calculate the",
                                           "values we would expect by chance in",
@@ -911,19 +919,6 @@ fluidRow(
                                             "Draws from the distribution of simple random graphs with the same",
                                             "stochastic tie probability as the observed network.",
                                             "The mean and 95% confidence intervals for each degree are plotted."))),
-                                 br(),
-                                 strong("Unreachable nodes"),
-                                 helpText("A pair of nodes without any path connecting",
-                                          'it has a geodesic distance of "inf".',
-                                          class = "nomarg"),
-                                 verbatimTextOutput('infsummary'),
-                                 fluidRow(
-                                   column(10,
-                                          checkboxInput('excludeInfs',
-                                                        label=span('Exclude "inf"s from plot'),
-                                                        value=FALSE))
-                                   ),
-
                                  br(),
                                  downloadButton('geodistdownload', label= 'Download Plot', class="btn-sm")
                   ),

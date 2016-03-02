@@ -479,11 +479,12 @@ menuattr <- reactive({
 numattr <- reactive({
     numattr <- c()
     if(is.network(nw())){
-      for(i in 1:length(menuattr())){
-        if(is.numeric(get.vertex.attribute(nw(),menuattr()[i]))){
-          numattr <- append(numattr, menuattr()[i])
-        }
-      }}
+      if(length(menuattr()) > 0){
+        for(i in 1:length(menuattr())){
+          if(is.numeric(get.vertex.attribute(nw(),menuattr()[i]))){
+            numattr <- append(numattr, menuattr()[i])
+          }
+      }}}
     numattr
 })
 

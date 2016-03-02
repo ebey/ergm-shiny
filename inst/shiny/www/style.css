@@ -207,7 +207,7 @@ div.mischelperbox {
 
 div.warning {
   position: absolute;
-  display: inline;
+  display: block;
   padding: 5px 10px 5px 5px;
   border: 1px solid;
   font-size: 0.82em;

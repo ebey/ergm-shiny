@@ -817,6 +817,7 @@ fluidRow(
                             )
                      )),
                    #span(bsAlert(inputId = 'colorwarning'), style='font-size: 0.82em;'),
+                   br(),
                    strong("Size nodes:"),
                    helpText("Choose a numeric attribute or measurement to edit the size of the nodes.",
                             class = "nomarg"),

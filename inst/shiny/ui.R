@@ -327,10 +327,18 @@ fluidRow(
                 column(6,
                     selectizeInput('samplenet', label="Choose a network",
                                 choices=c("No network chosen" = '',
-                                          "Planinng Diagnostics Info Exchange" =
+                                          "Planning Diagnostics Info Exchange" =
                                             'PlanningDiagnostics_InfoExchange',
+                                          #"Planning Diagnostics Work Together" =
+                                          #  'PlanningDiagnostics_WorkTogether',
                                           "Planning Medicines Info Exchange" =
                                             'PlanningMedicines_InfoExchange',
+                                          #"Planning Medicines Work Together" =
+                                          #  'PlanningMedicines_WorkTogether',
+                                          "Quantification Diagnostics Info Exchange" =
+                                            "QuantificationDiagnostics_InfoExchange",
+                                          "Quantification Diagnostics Work Together" =
+                                            "QuantificationDiagnostics_WorkTogether",
                                           "Uganda HPV Information" =
                                             'Uganda_HPV_information',
                                           "Uganda HPV Work" = 'Uganda_HPV_work'))
@@ -785,7 +793,7 @@ fluidRow(
                                  label = 'Display vertex names',
                                  value = FALSE),
                    br(),
-                   strong("Vertex opacity:"),
+                   strong("Node opacity:"),
                    helpText("Clear = 0, Solid = 1",
                             class = "nomarg"),
                    sliderInput('transp',

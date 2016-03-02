@@ -5,7 +5,11 @@ library(lattice)
 library(latticeExtra)
 
 load("PlanningDiagnostics_InfoExchange")
+load("PlanningDiagnostics_WorkTogether")
 load("PlanningMedicines_InfoExchange")
+load("PlanningMedicines_WorkTogether")
+load("QuantificationDiagnostics_InfoExchange")
+load("QuantificationDiagnostics_WorkTogether")
 load("Uganda_HPV_information")
 load("Uganda_HPV_work")
 

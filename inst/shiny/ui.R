@@ -592,21 +592,7 @@ fluidRow(
                            'from one node to another.'))
                ),
       tabPanel('More', value='More', br(),
-               h5('Null model tests', icon('angle-double-left'),
-                  id="cugtitle"),
-               wellPanel(id="cugbox",
-                 column(4, uiOutput("dynamiccugterm")),
-                 column(4, selectInput("ncugsims",
-                                       label = "Number of simulations",
-                                       choices = c(100, 200, 500))),
-                 column(3, actionButton("cugButton", label = "Run",
-                                        style="margin-top: 25px;")),
-                 br(),
-                 plotOutput("cugtest"),
-                 br(),
-                 downloadButton('cugtestdownload', label = "Download Plot",
-                                class="btn-sm")
-               ),
+
                h5('Mixing matrix', icon('angle-double-left'),
                   id="mixmxtitle"),
                wellPanel(id="mixmxbox",
@@ -619,7 +605,7 @@ fluidRow(
                    verbatimTextOutput('mixingmatrix')
                  )
                ),
-               h5('Graph-level descriptive indices',
+               h5('Network-level descriptive indices',
                   icon('angle-double-left'), id="graphleveltitle"),
                wellPanel(id="graphlevelbox",
                  fluidRow(
@@ -661,43 +647,19 @@ fluidRow(
                   column(3, p(textOutput('gclose'), class='snum')),
                   column(4, selectInput('gclosecmode', label=NULL,
                                         choices=c('directed','undirected',
-                                                  'suminvdir','suminvundir')))),
-                 fluidRow(
-                   column(4, p('Stress Centrality:', class='stitle')),
-                   column(3, p(textOutput('gstress'), class='snum')),
-                   column(4, selectInput('gstresscmode', label=NULL,
-                                         choices=c('directed','undirected')))
-                 ),
-                 fluidRow(
-                   column(4, p('(Harary) Graph Centrality:', class='stitle')),
-                   column(3, p(textOutput('ggraphcent'), class='snum')),
-                   column(4, selectInput('ggraphcentcmode', label=NULL,
-                                         choices=c('directed', 'undirected')))
-                 ),
-                 fluidRow(
-                   column(4, p('Eigenvector Centrality:', class='stitle')),
-                   column(3, p(textOutput('gevcent'), class='snum')),
-                   column(4, br())
-                 ),
-                 fluidRow(
-                   column(4, p('Information Centrality:', class='stitle')),
-                   column(3, p(textOutput('ginfocent'), class='snum')),
-                   column(4, selectInput('ginfocentcmode',label=NULL,
-                                         choices=c('weak', 'strong', 'upper',
-                                                   'lower')))
-                 )
-
-
+                                                  'suminvdir','suminvundir'))))
                )),
 
-               h5('Vertex-level descriptive indices',
+               h5('Node-level descriptive indices',
                   icon('angle-double-left'), id="nodeleveltitle"),
                wellPanel(id="nodelevelbox",
                  fluidRow(
-                     column(2,span("Vertex index:")),
+                     column(2,span("Node index:")),
                      column(5, numericInput('nodeind', label=NULL, value=1,
                                             min=1))
                      ),
+                 br(),
+                 column(3, textOutput("nodename")), br(),
                  tags$hr(),
                  fluidRow(
                    column(2, offset=3, tags$u('Current vertex')),
@@ -734,43 +696,23 @@ fluidRow(
                             class = "smallselect"),
                      column(2, p(textOutput('nclosemin'))),
                      column(2, p(textOutput('nclosemax')))
-                     ),
-                   fluidRow(
-                     column(3, p('Stress Centrality:', class='stitle')),
-                     column(2, p(textOutput('nstress'), class='snum')),
-                     column(3, selectInput('nstresscmode', label=NULL,
-                                           choices=c('directed','undirected')),
-                            class = "smallselect"),
-                     column(2, p(textOutput('nstressmin'))),
-                     column(2, p(textOutput('nstressmax')))
-                     ),
-                   fluidRow(
-                     column(3, p('(Harary) Graph Centrality:', class='stitle')),
-                     column(2, p(textOutput('ngraphcent'), class='snum')),
-                     column(3, selectInput('ngraphcentcmode', label=NULL,
-                                           choices=c('directed', 'undirected')),
-                            class = "smallselect"),
-                     column(2, p(textOutput('ngraphcentmin'))),
-                     column(2, p(textOutput('ngraphcentmax')))
-                     ),
-                   fluidRow(
-                     column(3, p('Eigenvector Centrality:', class='stitle')),
-                     column(2, p(textOutput('nevcent'), class='snum')),
-                     column(3, br()),
-                     column(2, p(textOutput('nevcentmin'))),
-                     column(2, p(textOutput('nevcentmax')))
-                     ),
-                   fluidRow(
-                     column(3, p('Information Centrality:', class='stitle')),
-                     column(2, p(textOutput('ninfocent'), class='snum')),
-                     column(3, selectInput('ninfocentcmode',label=NULL,
-                                           choices=c('weak', 'strong', 'upper',
-                                                     'lower')),
-                            class = "smallselect"),
-                     column(2, p(textOutput('ninfocentmin'))),
-                     column(2, p(textOutput('ninfocentmax')))
                      )
                  ),
+               h5('Null model tests', icon('angle-double-left'),
+                  id="cugtitle"),
+               wellPanel(id="cugbox",
+                         column(4, uiOutput("dynamiccugterm")),
+                         column(4, selectInput("ncugsims",
+                                               label = "Number of simulations",
+                                               choices = c(100, 200, 500))),
+                         column(3, actionButton("cugButton", label = "Run",
+                                                style="margin-top: 25px;")),
+                         br(),
+                         plotOutput("cugtest"),
+                         br(),
+                         downloadButton('cugtestdownload', label = "Download Plot",
+                                        class="btn-sm")
+               ),
               conditionalPanel(condition = "output.errstate == '1'",
                                div(class = "error", uiOutput("errbox")))
 
@@ -883,9 +825,9 @@ fluidRow(
                   ),
                 conditionalPanel(condition='input.plottabs == "Geodesic Distribution"',
                                  tags$label("Y-axis units:"), br(),
-                                 actionButton("countButton_gd", "Count of vertex pairs",
+                                 actionButton("countButton_gd", "Count of dyads",
                                               class="btn-sm active"),
-                                 actionButton("percButton_gd", "Percent of vertex pairs",
+                                 actionButton("percButton_gd", "Percent of dyads",
                                               class="btn-sm"),
                                  br(), br(),
                                  strong("Unreachable nodes"),

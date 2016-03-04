@@ -1974,7 +1974,7 @@ output$geodistplot <- renderPlot({
   bern_lowerline <- bern_means - 2*bern_stderr
   maxgeo_b <- length(bern_means)-1
 
-  ylabel <- "Count of Vertex Pairs"
+  ylabel <- "Count of Dyads"
 
   #for density plot
   if(state$plotperc_gd){
@@ -1986,7 +1986,7 @@ output$geodistplot <- renderPlot({
     bern_lowerline <- bern_lowerline/sum(gdata)
     gdata <- gdata/sum(gdata)
     ylimit <- max(gdata, bern_upperline, unif_upperline)
-    ylabel <- "Percent of Vertex Pairs"
+    ylabel <- "Percent of Dyads"
   }
 
   # make sure that barplot and lines have the same length
@@ -2079,7 +2079,7 @@ output$geodistdownload <- downloadHandler(
     bern_lowerline <- bern_means - 2*bern_stderr
     maxgeo_b <- length(bern_means)-1
 
-    ylabel <- "Count of Vertex Pairs"
+    ylabel <- "Count of Dyads"
 
     #for density plot
     if(state$plotperc_gd){
@@ -2091,7 +2091,7 @@ output$geodistdownload <- downloadHandler(
       bern_lowerline <- bern_lowerline/sum(gdata)
       gdata <- gdata/sum(gdata)
       ylimit <- max(gdata, bern_upperline, unif_upperline)
-      ylabel <- "Percent of Vertex Pairs"
+      ylabel <- "Percent of Dyads"
     }
 
     # make sure that barplot and lines have the same length
@@ -2546,6 +2546,10 @@ output$ginfocent <- renderText({
   i
 })
 outputOptions(output,'ginfocent',suspendWhenHidden=FALSE)
+
+output$nodename <- renderText({
+  network.vertex.names(nw())[input$nodeind]
+})
 
 output$ndeg <- renderText({
   if(!is.network(nw())) {return()}

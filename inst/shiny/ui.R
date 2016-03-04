@@ -335,6 +335,14 @@ fluidRow(
                                             'PlanningMedicines_InfoExchange',
                                           #"Planning Medicines Work Together" =
                                           #  'PlanningMedicines_WorkTogether',
+                                          "Procurement Diagnostics Info Exchange" =
+                                            "ProcurementDiagnostics_InfoExchange",
+                                          "Procurement Diagnostics Work Together" =
+                                            "ProcurementDiagnostics_WorkTogether",
+                                          "Procurement Medicines Info Exchange" =
+                                            "ProcurementMedicines_InfoExchange",
+                                          "Procurement Medicines Work Together" =
+                                            "ProcurementMedicines_WorkTogether",
                                           "Quantification Diagnostics Info Exchange" =
                                             "QuantificationDiagnostics_InfoExchange",
                                           "Quantification Diagnostics Work Together" =

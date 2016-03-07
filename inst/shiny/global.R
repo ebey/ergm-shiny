@@ -190,17 +190,24 @@ glossary[["bipartite network"]] <- c("A bipartite network is one with two differ
 glossary$missing <- "A piece of data is missing if we don't know what value it takes. A missing edge is different than a null edge (one that we know does not exist)."
 glossary$isolate <- "An isolate is a node that is not connected to any other nodes."
 glossary$homophily <- "The tendency for nodes to form ties with others that have similar characteristics. For example, friendship networks among students might display homophily within age group."
+glossary$heterogeneity <- "The existence of nodes with different attributes, and the tendency of nodes that are different from one another to have edges between them."
 glossary$transitivity <- "The tendency to close triangles when two edges already exist. For example, the notion that the friend of my friend is my friend."
 glossary$hub <- "A hub is a node with many links."
 glossary[["empty network"]] <- "A network without any edges."
 glossary[["complete network"]] <- "A network where every possible edge exists."
 glossary$adjacent <- "Two nodes are adjacent if they are connected by an edge."
-glossary$incident <- ""
+glossary$incident <- "An edge that is connected to a node is said to be incident on that node."
 glossary$neighbor <- "A node's neighbors are the other nodes that it is connected to by edges."
-glossary$betweenness <- "Betweenness is a centrality measure that takes into account how many geodesics pass through a node. There are "
+glossary$betweenness <- "Betweenness centrality is a node-level measure that takes into account how many geodesics pass through a node. Betweenness centralization is a network-level measure that takes into account every node's betweenness centrality."
+glossary$closeness <- "Closeness centrality is a node-level measure that takes into account how many steps it takes to reach every other node in the network. Closeness centralization is a network-level measure that takes into account every node's closeness centrality."
 glossary$directed <- "A directed network (also known as a digraph) is one where the edges have a direction associated with them. In this case an edge from A to B is different than and edge from B to A."
 glossary$undirected <- "An undirected network is one where the edges have no direction associated with them. In this case an edge from A to B is the same as an edge from B to A."
-glossary$attribute <- ""
+glossary$attribute <- c("Nodal attributes describe characteristics about the individual nodes, such as a person's age or an organization's location.",
+                        "Edge attributes describe characteristics about the relationship between the two nodes the edge connects, such as duration.")
 glossary$triangle <- "A triangle is a group of three nodes that are all connected by edges."
-
-
+glossary$centrality <- "A node-level measure of how well-connected a node is. There are various centrality measures (e.g. betweenness, closeness, degree) that take slightly different factors into account."
+glossary$centralization <- "A network-level measure of how well=connected nodes are. There are various differnet centralization measures (e.g. betweenness, closeness, mean degree) that take slightly different factors into account."
+glossary$core <- c("When there is a region in the center of a network graph that is significantly more dense (has more edges) than the rest, it is called the core.",
+                   "(The less dense region is called the periphery.)")
+glossary$periphery <- c("When there is a region around the edge of a network graph that is significantly less dense (has fewer edges) than the rest, it is called the periphery.",
+                        "(The denser region is called the core.)")

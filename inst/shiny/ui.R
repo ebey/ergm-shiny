@@ -604,6 +604,12 @@ fluidRow(
                h5('Mixing matrix', icon('angle-double-left'),
                   id="mixmxtitle"),
                wellPanel(id="mixmxbox",
+                 p("A", strong("mixing matrix"), "is a cross-tabulation of the edges in a network, within one nodal attribute category.",
+                   "After choosing a nodal attribute, the different levels of that attribute will become the row and column labels",
+                   "of the matrix. The interior cells of the matrix will contain the total number of edges between nodes with the",
+                   "corresponding attributes. For directed networks, the rows of the matrix correspond to the node the edge originates",
+                   "from, the columns correspond to the node where the edge terminates. Matrices for undirected networks are symmetric",
+                   "because edges have no origin or termination."),
                  fluidRow(
                    column(6, uiOutput('mixmxchooser')),
                    column(6, downloadButton("mixmxdownload",

@@ -587,8 +587,8 @@ vcol <- reactive({
 ecol <- reactive({
   if(!is.network(nw())){return()}
   nw_var <- nw()
-  if(input$colorby_edge == 1){
-    ecol <- rep(1, network.edgecount(nw_var))
+  if(input$colorby_edge == "black"){
+    ecol <- rep("black", network.edgecount(nw_var))
   } else {
     ecol <- get.edge.attribute(nw_var, attrname = input$colorby_edge)
   }
@@ -607,7 +607,7 @@ legendlabels <- reactive({
         legendlabels <- c(legendlabels, "Other")
       }
     }
-  if(input$colorby_edge != 1){
+  if(input$colorby_edge != "black"){
     edgelabels <- sort(unique(get.edge.attribute(nw_var, input$colorby_edge)))
   }
     legendlabels <- c(legendlabels, edgelabels)
@@ -1227,7 +1227,7 @@ output$dynamiccolor_edge <- renderUI({
   eattr <- eattr[-which(eattr == "na")]
   selectInput('colorby_edge',
               label = NULL,
-              c('None' = 1, eattr))
+              c('None' = "black", eattr))
 })
 outputOptions(output,'dynamiccolor_edge', suspendWhenHidden=FALSE, priority=10)
 
@@ -1259,6 +1259,7 @@ output$nwplot <- renderPlot({
   color <- adjustcolor(vcol(), alpha.f = input$transp)
   ecolor <- ecol()
   ecolor[ecolor == 0] <- "lightgrey"
+  ecolor[ecolor == 1] <- "black"
   vborder <- 1
   vcex <- nodesize()
   if(is.bipartite(nw())){
@@ -1273,9 +1274,9 @@ output$nwplot <- renderPlot({
       nclick <- as.numeric(rownames(values$clickedpoints))
       color <- adjustcolor(vcol(), alpha.f = 0.4)
       color[nclick] <- vcol()[nclick]
-      ecolor <- adjustcolor(ecol(), alpha.f = 0.40)
+      ecolor <- adjustcolor(ecolor, alpha.f = 0.40)
       vborder <- rep("lightgrey", nodes())
-      vborder[nclick] <- 1
+      vborder[nclick] <- "black"
     }
   }
 
@@ -1289,7 +1290,7 @@ output$nwplot <- renderPlot({
                vertex.cex = vcex,
                edge.col = ecolor)
 
-  if(input$colorby != 2 | input$colorby_edge != 1){
+  if(input$colorby != 2 | input$colorby_edge != "black"){
     ltitle <- ""
     lborder <- c()
     lfill <- c()
@@ -1301,7 +1302,7 @@ output$nwplot <- renderPlot({
       lfill <- legendfill()
       lty <- c(lty, rep(0, length(legendfill())))
     }
-    if(input$colorby_edge != 1){
+    if(input$colorby_edge != "black"){
       lecol <- sort(unique(ecol()))
       lecol[lecol == 0] <- "lightgrey"
       lborder <- c(lborder, rep(0, length(lecol)))

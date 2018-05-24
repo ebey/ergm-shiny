@@ -38,7 +38,7 @@ tabPanel(title=span('statnetWeb PATH', id="sWtitle"),
             p("Click on", strong("Network Basics"), "to learn some of the basic",
               "terminology for network analysis"),
             p("Click on", strong("Get Started"), "to move to the data page and",
-              "choose a network from the ADP Linkages project, or to upload",
+              "choose a sample network, or to upload",
               "network data from other projects."),
             br(),
             p(img(src = "fmh.png", width = 200), align = "center"),
@@ -302,8 +302,8 @@ fluidRow(
                                                  "files should hold edge labels, the first column",
                                                  "should hold vertex labels", class = "nomarg")),
                        conditionalPanel("input.matrixtype == 'edgelist'",
-                                        helpText("For edge lists, .csv files should not have row",
-                                                 "or column labels.", class = "nomarg")),
+                                        helpText("For edge lists, the first row of .csv files",
+                                                 "should have column headers.", class = "nomarg")),
 
                        br(),
                        strong('Network attributes'),
@@ -327,29 +327,10 @@ fluidRow(
                 column(6,
                     selectizeInput('samplenet', label="Choose a network",
                                 choices=c("No network chosen" = '',
-                                          "Planning Diagnostics Info Exchange" =
-                                            'PlanningDiagnostics_InfoExchange',
-                                          #"Planning Diagnostics Work Together" =
-                                          #  'PlanningDiagnostics_WorkTogether',
-                                          "Planning Medicines Info Exchange" =
-                                            'PlanningMedicines_InfoExchange',
-                                          #"Planning Medicines Work Together" =
-                                          #  'PlanningMedicines_WorkTogether',
-                                          "Procurement Diagnostics Info Exchange" =
-                                            "ProcurementDiagnostics_InfoExchange",
-                                          "Procurement Diagnostics Work Together" =
-                                            "ProcurementDiagnostics_WorkTogether",
-                                          "Procurement Medicines Info Exchange" =
-                                            "ProcurementMedicines_InfoExchange",
-                                          "Procurement Medicines Work Together" =
-                                            "ProcurementMedicines_WorkTogether",
-                                          "Quantification Diagnostics Info Exchange" =
-                                            "QuantificationDiagnostics_InfoExchange",
-                                          "Quantification Diagnostics Work Together" =
-                                            "QuantificationDiagnostics_WorkTogether",
-                                          "Uganda HPV Information" =
-                                            'Uganda_HPV_information',
-                                          "Uganda HPV Work" = 'Uganda_HPV_work'))
+                                          "Faux Desert High" =
+                                            'faux.desert.high',
+                                          "Faux Mesa High" =
+                                            'faux.mesa.high'))
                 )
                )
              )

@@ -4,18 +4,8 @@ library(RColorBrewer)
 library(lattice)
 library(latticeExtra)
 
-load("PlanningDiagnostics_InfoExchange")
-load("PlanningDiagnostics_WorkTogether")
-load("PlanningMedicines_InfoExchange")
-load("PlanningMedicines_WorkTogether")
-load("QuantificationDiagnostics_InfoExchange")
-load("QuantificationDiagnostics_WorkTogether")
-load("ProcurementDiagnostics_InfoExchange")
-load("ProcurementDiagnostics_WorkTogether")
-load("ProcurementMedicines_InfoExchange")
-load("ProcurementMedicines_WorkTogether")
-load("Uganda_HPV_information")
-load("Uganda_HPV_work")
+data("faux.mesa.high")
+data("faux.desert.high")
 
 BRGcol <- "darkred"
 CUGcol <- "darkorange"
@@ -116,17 +106,24 @@ nwinit <- reactive({
         header <- TRUE
         row_names<-1
         if(input$matrixtype == "edgelist"){
-          header <- FALSE
+          header <- TRUE
           row_names<-NULL
         }
-        try({nw_var <- network(read.csv(paste(filepath), sep=",", header=header,
-                                        row.names=row_names),
+        rawfile <- read.csv(paste(filepath), sep=",", header=header,
+                            row.names=row_names)
+        if(input$matrixtype == "edgelist"){
+          eattr1 <- rawfile[,-(1:2)]
+          rawfile <- rawfile[,1:2]
+        }
+        try({nw_var <- network(rawfile,
                           directed=input$dir, loops=input$loops,
                           multiple=FALSE, bipartite=input$bipartite,
                           matrix.type=input$matrixtype,
                           ignore.eval=FALSE, names.eval='edgevalue')
              })
-
+        if(exists("eattr1") & exists("nw_var") & input$matrixtype == "edgelist"){
+          set.edge.attribute(nw_var,attrname = names(eattr1), value = eattr1[,])
+        }
       }
     }
   }
@@ -562,7 +559,7 @@ vcol <- reactive({
   if(!is.network(nw())){return()}
   nw_var <- nw()
   if(input$colorby == 2){
-    vcol <- rep(2, nodes())
+    vcol <- rep("	#A9A9A9", nodes())
   } else {
     full_list <- get.vertex.attribute(nw_var,input$colorby)
     short_list <- sort(unique(full_list))
@@ -590,7 +587,22 @@ ecol <- reactive({
   if(input$colorby_edge == "black"){
     ecol <- rep("black", network.edgecount(nw_var))
   } else {
-    ecol <- get.edge.attribute(nw_var, attrname = input$colorby_edge)
+    ecol <- as.character(get.edge.attribute(nw_var, attrname = input$colorby_edge))
+    eattsort <- sort(unique(ecol))
+    if(length(eattsort) == 2){
+      epal <- c("lightgray", "black")
+    } else if (is.numeric(ecol)){
+      epal <- brewer.pal(n = length(eattsort)+1, name = "Blues")[-1]
+    } else {
+      epal <- brewer.pal(n = length(eattsort), name = "Dark2")
+    }
+    if("" %in% eattsort){
+      ecol[ecol == ""] <- "#D3D3D3"
+      eattsort <- eattsort[-1]
+    }
+    for(i in seq(length(eattsort))){
+      ecol[ecol == eattsort[i]] <- epal[i]
+    }
   }
   ecol
 })

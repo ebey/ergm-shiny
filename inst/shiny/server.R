@@ -559,7 +559,7 @@ vcol <- reactive({
   if(!is.network(nw())){return()}
   nw_var <- nw()
   if(input$colorby == 2){
-    vcol <- rep("	#A9A9A9", nodes())
+    vcol <- rep("#A9A9A9", nodes())
   } else {
     full_list <- get.vertex.attribute(nw_var,input$colorby)
     short_list <- sort(unique(full_list))

@@ -620,7 +620,7 @@ legendlabels <- reactive({
       }
     }
   if(input$colorby_edge != "black"){
-    edgelabels <- sort(unique(get.edge.attribute(nw_var, input$colorby_edge)))
+    edgelabels <- sort(unique(as.character(get.edge.attribute(nw_var, input$colorby_edge))))
   }
     legendlabels <- c(legendlabels, edgelabels)
   })
@@ -1308,6 +1308,7 @@ output$nwplot <- renderPlot({
     lfill <- c()
     lecol <- NULL
     lty <- c()
+    lwd <-c()
     if(input$colorby != 2){
       ltitle <- input$colorby
       lborder <- rep("black", length(legendfill()))
@@ -1315,15 +1316,18 @@ output$nwplot <- renderPlot({
       lty <- c(lty, rep(0, length(legendfill())))
     }
     if(input$colorby_edge != "black"){
-      lecol <- sort(unique(ecol()))
+      #sort the line colors the same way that the legend entries are
+      lecol <- unique(ecol())[order(unique(as.character(
+        get.edge.attribute(nw_var, input$colorby_edge))))]
       lecol[lecol == 0] <- "lightgrey"
       lborder <- c(lborder, rep(0, length(lecol)))
       lfill <- c(lfill, rep(0, length(lecol)))
       lty <- c(lty, rep(1, length(lecol)))
+      lwd <- c(lwd, rep(2, length(lecol)))
     }
 
     legend('bottomright', title = ltitle, legend = legendlabels(),
-           fill = lfill, bty='n', lty = lty, col = lecol,
+           fill = lfill, bty='n', lty = lty, lwd = lwd, col = lecol,
            border = lborder, merge = TRUE)
 
   }
